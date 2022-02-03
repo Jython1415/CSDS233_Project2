@@ -72,6 +72,26 @@ public interface NumList {
     public abstract void removeDuplicates();
 
     /**
+     * Returns whether the list is currently sorted in increasing order or not
+     * @return true if the list is sorted, false otherwise
+     */
+    public abstract boolean isSorted();
+
+    /**
+     * Reverses the order of the elements in the list
+     */
+    public abstract void reverse();
+
+    /**
+     * Creates a new list which has all elements in the input lists without any duplicate elements
+     * If both lists are sorted, then the resulting list is also sorted
+     * @param list1 the first list
+     * @param list2 the second list
+     * @return a NumList with all the elements of the input lists without any duplicate elements
+     */
+    public abstract NumList union(NumList list1, NumList list2);
+
+    /**
      * Provides a String representation of this list
      * For an empty list, an empty String is returned
      * Numbers are separated by a space and no other characters are included
