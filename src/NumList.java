@@ -1,7 +1,5 @@
-import java.lang.IndexOutOfBoundsException;
-
 /**
- * 
+ * An interface for a list that contains doubles
  * @author Joshua Shew
  */
 public interface NumList {
