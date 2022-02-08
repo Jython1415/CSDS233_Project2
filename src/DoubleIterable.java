@@ -7,5 +7,5 @@ public interface DoubleIterable {
      * Returns an iterator for the list that begins at the front of the list
      * @return a DoubleIterator for the list the method is called on
      */
-    public abstract DoubleIterator iterator(NumList list);
+    public abstract DoubleIterator iterator();
 }

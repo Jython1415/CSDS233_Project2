@@ -2,7 +2,7 @@
  * An interface for a list that contains doubles
  * @author Joshua Shew
  */
-public interface NumList {
+public interface NumList extends DoubleIterable {
     /**
      * Getter method for the size of the list
      * The size is the number of numbers currently in the list

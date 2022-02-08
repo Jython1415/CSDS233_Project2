@@ -182,6 +182,32 @@ public class NumArrayList implements NumList {
     }
 
     /**
+     * Returns whether the list is currently sorted in increasing order or not
+     * @return true if the list is sorted, false otherwise
+     */
+    public boolean isSorted() {
+        return false;
+    }
+
+    /**
+     * Reverses the order of the elements in the list
+     */
+    public void reverse() {
+
+    }
+
+    /**
+     * Creates a new list which has all elements in the input lists without any duplicate elements
+     * If both lists are sorted, then the resulting list is also sorted
+     * @param list1 the first list
+     * @param list2 the second list
+     * @return a NumList with all the elements of the input lists without any duplicate elements
+     */
+    public NumList union(NumList list1, NumList list2) {
+        return new NumArrayList();
+    }
+
+    /**
      * Provides a String representation of this array
      * For an empty array, an empty String is returned
      * Numbers are separated by a space and no other characters are included
@@ -199,6 +225,51 @@ public class NumArrayList implements NumList {
         }
 
         return result.toString();
+    }
+
+    /**
+     * Returns an iterator for the list that begins at the front of the list
+     * @return a DoubleIterator for the list the method is called on
+     */
+    public DoubleIterator iterator() {
+        return new NumArrayListIterator(this);
+    }
+
+    /**
+     * 
+     */
+    private static class NumArrayListIterator implements DoubleIterator {
+        /**
+         * 
+         * @param list
+         */
+        public NumArrayListIterator(NumArrayList list) {
+
+        }
+        
+        /**
+         * Checks whether there is another value ahead of the iterator in the list
+         * @return true if there is a value, false otherwise
+         */
+        public boolean hasNext() {
+            return false;
+        }
+
+        /**
+         * Moves the iterator forward one value and returns that value
+         * @return the value at iterator's current index
+         */
+        public double next() {
+            return 0.0;
+        }
+
+        /**
+         * Retrieves the value the iterator is current at without moving it forward
+         * @return the value at the iterator's current index
+         */
+        public double peek() {
+            return 0.0;
+        }
     }
 
     /**
