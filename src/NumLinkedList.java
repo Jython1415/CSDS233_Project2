@@ -383,9 +383,6 @@ public class NumLinkedList implements NumList {
     }
 
     private static class NumLinkedListIterator implements DoubleIterator {
-        /* Stores a reference to the list that this iterator is accessing */
-        private NumLinkedList list = null;
-
         /* Stores a reference to the current position of the iterator */
         private LLNode nodePtr = null;
         
@@ -394,7 +391,6 @@ public class NumLinkedList implements NumList {
          * @param list the list to iterate over
          */
         public NumLinkedListIterator(NumLinkedList list) {
-            this.list = list;
             this.nodePtr = list.getFront();
         }
         
