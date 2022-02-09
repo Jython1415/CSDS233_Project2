@@ -27,9 +27,9 @@ public class NumArrayListTester {
      * @throws NoSuchMethodException passes along exception from reflection
      */
     private static boolean compareNumArrayListToArray(NumArrayList list1, double[] array) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-        Method getInternalArray = list1.getClass().getDeclaredMethod("getInternalArray", null);
+        Method getInternalArray = list1.getClass().getDeclaredMethod("getInternalArray", (Class<?>[]) null);
         getInternalArray.setAccessible(true);
-        double[] arrayList = (double[])(getInternalArray.invoke(list1, null));
+        double[] arrayList = (double[])(getInternalArray.invoke(list1, (Object[]) null));
         for (int i = 0; i < list1.size(); i++) {
             if (arrayList[i] != array[i]) {
                 return false;
@@ -384,6 +384,30 @@ public class NumArrayListTester {
         list1.removeDuplicates();
         NumArrayListTester.assertNumArrayListEquals(message,
                                                     list1, new double[]{0.0});
+    }
+
+    /**
+     * Unit tests for the isSorted method
+     */
+    @Test
+    public void testIsSorted() {
+
+    }
+
+    /**
+     * Unit tests for the reverse method
+     */
+    @Test
+    public void testReverse() {
+
+    }
+
+    /**
+     * Unit tests for the union method
+     */
+    @Test
+    public void testUnion() {
+
     }
 
     /**
