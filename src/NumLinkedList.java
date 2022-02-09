@@ -1,4 +1,60 @@
 public class NumLinkedList implements NumList {
+    /* Stores a reference to the first node in the list */
+    private LLNode front = null;
+
+    /* Stores a reference to the last node in the list */
+    private LLNode back = null;
+
+    /* Keeps track of how many elements are in the list */
+    private int size = 0;
+
+    /* The maximum capacity of the list */
+    private final int capacity = Integer.MAX_VALUE;
+
+    /* Keeps track of whether or not the list is sorted */
+    private boolean sorted = true;
+
+    /**
+     * Constructor for an empty linked list
+     */
+    public NumLinkedList() {
+        this.front = null;
+        this.back = null;
+        this.size = 0;
+        this.sorted = true;
+    }
+
+    /**
+     * Getter for the front of the list
+     * @return a reference to the first node in the list
+     */
+    private LLNode getFront() {
+        return this.front;
+    }
+
+    /**
+     * Setter for the front of the list
+     * @param front a reference to the first node in the list
+     */
+    private void setFront(LLNode front) {
+        this.front = front;
+    }
+
+    /**
+     * Getter for the back of the list
+     * @return a reference to the last node in the list
+     */
+    private LLNode getBack() {
+        return this.back;
+    }
+
+    /**
+     * Setter for the back of the 
+     * @param back
+     */
+    private void setBack(LLNode back) {
+        this.back = back;
+    }
 
     /**
      * Getter method for the size of the list
@@ -6,7 +62,21 @@ public class NumLinkedList implements NumList {
      * @return the size of the list
      */
     public int size() {
-        return 0;
+        return this.size;
+    }
+
+    /**
+     * Increments the size field
+     */
+    private void incrementSize() {
+        this.size++;
+    }
+
+    /**
+     * Decrements the size field
+     */
+    private void decrementSize() {
+        this.size--;
     }
 
     /**
@@ -15,7 +85,15 @@ public class NumLinkedList implements NumList {
      * @return the capacity of the list
      */
     public int capacity() {
-        return 0;
+        return this.capacity;
+    }
+
+    /**
+     * Setter for the sorted field
+     * @param sorted whether or not the list is sorted
+     */
+    private void setSorted(boolean sorted) {
+        this.sorted = sorted;
     }
 
     /**
@@ -128,7 +206,82 @@ public class NumLinkedList implements NumList {
         return new NumLinkedListIterator(this);
     }
 
+    private static class LLNode {
+        /* Stores the value in the node */
+        private double value = 0.0;
+
+        /* Stores a reference to the next node in the list */
+        private LLNode next = null;
+
+        /* Stores a reference to the previous node in the list */
+        private LLNode prev = null;
+
+        /**
+         * Constructor for a node
+         * @param value the value to store in the node
+         * @param prev a reference to the previous node in the list
+         * @param next a reference to the next node in the list
+         */
+        public LLNode(double value, LLNode prev, LLNode next) {
+            this.value = value;
+            this.prev = prev;
+            this.next = next;
+        }
+
+        /**
+         * Getter for the value
+         * @return the value stored in the node
+         */
+        public double getValue() {
+            return this.value;
+        }
+
+        /**
+         * Setter for the value
+         * @param value the value to store in the node
+         */
+        public void setValue(double value) {
+            this.value = value;
+        }
+
+        /**
+         * Getter for the previous node in the list
+         * @return a reference to the previous node in the list
+         */
+        public LLNode getPrev() {
+            return this.prev;
+        }
+
+        /**
+         * Setter for the previous node in the list
+         * @param prev a reference to the previous node in the list
+         */
+        public void setPrev(LLNode prev) {
+            this.prev = prev;
+        }
+
+        /**
+         * Getter for the next node in the list
+         * @return a reference to the next node in the list
+         */
+        public LLNode getNext() {
+            return this.next;
+        }
+
+        /**
+         * Setter for the next node in the list
+         * @param next a reference to the next node in the list
+         */
+        public void setNext(LLNode next) {
+            this.next = next;
+        }
+    }
+
     private static class NumLinkedListIterator implements DoubleIterator {
+        /**
+         * Constructor for an iterator for NumLinkedList
+         * @param list the list to iterate over
+         */
         public NumLinkedListIterator(NumLinkedList list) {
 
         }
