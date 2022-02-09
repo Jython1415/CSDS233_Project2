@@ -127,7 +127,30 @@ public class NumLinkedList implements NumList {
      * @param value the value to add to the list
      */
     public void insert(int i, double value) {
+        if (i >= size() - 1) {
+            add(value);
+        }
+        else if (i == 0) {
+            // updates sorted based on the new value if the list is sorted, no update otherwise
+            setSorted(isSorted() ? value <= getFront().getValue() : isSorted());
 
+            setFront(new LLNode(value, null, getFront()));
+            getFront().getNext().setPrev(getFront());
+        }
+        else {
+            // finds the node directly before the insertion point
+            LLNode nodePtr = nodeLookup(i - 1);
+
+            // updates sorted based on the new value if the list is sorted, no update otherwise
+            setSorted(isSorted() ?
+                      nodePtr.getValue() <= value && value <= nodePtr.getNext().getValue() :
+                      isSorted());
+
+            nodePtr.setNext(new LLNode(value, nodePtr, nodePtr.getNext()));
+            nodePtr.getNext().getNext().setPrev(nodePtr.getNext());
+        }
+
+        incrementSize();
     }
 
     /**
