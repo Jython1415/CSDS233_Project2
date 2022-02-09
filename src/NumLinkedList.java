@@ -160,7 +160,25 @@ public class NumLinkedList implements NumList {
      * @param i the index where the value should be removed
      */
     public void remove(int i) {
+        if (0 <= i && i < size()) {
+            if (size == 1) {
+                setFront(null);
+                setBack(null);
+            }
+            else if (i == 0) {
+                setFront(getFront().getNext());
+            }
+            else if (i == size() - 1) {
+                setBack(getBack().getPrev());
+            }
+            else {
+                LLNode nodePtr = nodeLookup(i - 1);
+                nodePtr.setNext(nodePtr.getNext().getNext());
+            }
 
+            decrementSize();
+            /* check if sorted here */
+        }
     }
 
     /**
