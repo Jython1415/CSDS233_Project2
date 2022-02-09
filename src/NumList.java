@@ -5,14 +5,14 @@
 public interface NumList extends DoubleIterable {
     /**
      * Getter method for the size of the list
-     * The size is the number of numbers currently in the list
+     * The size is the number of elements currently in the list
      * @return the size of the list
      */
     public abstract int size();
 
     /**
      * Getter method for the capacity of the list
-     * The capacity is the number of numbers the list can hold without resizing
+     * The capacity is the number of elements the list can hold without resizing
      * @return the capacity of the list
      */
     public abstract int capacity();
@@ -34,8 +34,8 @@ public interface NumList extends DoubleIterable {
     public abstract void insert(int i, double value);
 
     /**
-     * Removes the number at the specified position of the list
-     * All numbers after the specified position are shifted up the list
+     * Removes the element at the specified position of the list
+     * All elements after the specified position are shifted up the list
      * The size of the list is shortened by this method if there is a number at the specified position
      * @param i the index where the value should be removed
      */
