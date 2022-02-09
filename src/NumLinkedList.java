@@ -240,7 +240,21 @@ public class NumLinkedList implements NumList {
      * @return true if the two are equal, false otherwise
      */
     public boolean equals(NumList otherList) {
-        return false;
+        if (this.size() != otherList.size()) {
+            return false;
+        }
+        else {
+            DoubleIterator i1 = this.iterator();
+            DoubleIterator i2 = otherList.iterator();
+
+            while (i1.hasNext()) {
+                if (i1.next() != i2.next()) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 
     /**
