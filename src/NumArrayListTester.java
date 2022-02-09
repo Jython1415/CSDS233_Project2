@@ -391,6 +391,25 @@ public class NumArrayListTester {
      */
     @Test
     public void testIsSorted() {
+        // empty list
+
+        // list with one element
+
+        // list with two identical elements
+
+        // list with two elements in ascending order
+
+        // list with two elements in descending order
+
+        // list with multiple elements in ascending order
+
+        // list with multiple elements that are not sorted
+
+        // check a list that becomes sorted after removing an element
+
+        // check a list that becomes unsorted after adding a value
+
+        // check a list that becomes unsorted after adding a value
 
     }
 
@@ -399,7 +418,18 @@ public class NumArrayListTester {
      */
     @Test
     public void testReverse() {
+        // empty list
 
+        // list with one element
+
+        // list with two elements that are the same
+
+        // list with two elements that are different
+
+        // list with multiple elements
+
+        // repeated calls to reverse
+        
     }
 
     /**
@@ -407,6 +437,17 @@ public class NumArrayListTester {
      */
     @Test
     public void testUnion() {
+        // two empty lists
+
+        // one empty list and one list with one or multiple (unsorted) elements
+
+        // two unsorted lists with multiple elements (no duplicates)
+
+        // two unsorted lists with multiple elements (with duplicates)
+
+        // two sorted lists (no duplicates)
+
+        // two sorted lists (with duplicates)
 
     }
 
