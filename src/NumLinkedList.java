@@ -179,7 +179,7 @@ public class NumLinkedList implements NumList {
             }
 
             decrementSize();
-            /* check if sorted here */
+            setSorted(checkIfSorted());
         }
     }
 
