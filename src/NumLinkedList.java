@@ -150,6 +150,29 @@ public class NumLinkedList implements NumList {
     }
 
     /**
+     * Returns the i-th node of the list
+     * @param index the index of the list to get the node from
+     * @return a reference to the specified node
+     * @throws IndexOutOfBoundsException when the input index is greater than or equal to the size of the list
+     */
+    private LLNode nodeLookup(int index) throws IndexOutOfBoundsException {
+        // this check prevents a null pointer exception
+        if (index >= size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        else {
+            LLNode nodePtr = getFront();
+
+            // advance in the list index times
+            for (int i = 0; i < index; i++) {
+                nodePtr = nodePtr.getNext();
+            }
+
+            return nodePtr;
+        }
+    }
+
+    /**
      * Returns the i-th element of the list
      * @param i the index of the list to get the value from
      * @return the value stored at the specified index
