@@ -241,6 +241,23 @@ public class NumLinkedList implements NumList {
     }
 
     /**
+     * Checks the entire list to see if it is sorted
+     * @return true if the list is sorted, false otherwise
+     */
+    public boolean checkIfSorted() {
+        LLNode nodePtr = getFront();
+
+        for (int i = 0; i < size(); i++) {
+            nodePtr = nodePtr.getNext();
+            if (nodePtr.getValue() < nodePtr.getPrev().getValue()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Returns whether the list is currently sorted in increasing order or not
      * @return true if the list is sorted, false otherwise
      */
