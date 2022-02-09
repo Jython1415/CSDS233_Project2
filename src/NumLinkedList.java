@@ -187,6 +187,14 @@ public class NumLinkedList implements NumList {
      * @return true if the value is in the list, false otherwise
      */
     public boolean contains(double value) {
+        LLNode nodePtr = getFront();
+
+        for (int i = 0; i < size(); i++) {
+            if (nodePtr.getValue() == value) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -220,7 +228,7 @@ public class NumLinkedList implements NumList {
      * @throws IndexOutOfBoundsException when the input index is greater than or equal to the size of the list
      */
     public double lookup(int i) throws IndexOutOfBoundsException {
-        return 0.0;
+        return nodeLookup(i).getValue();
     }
 
     /**
