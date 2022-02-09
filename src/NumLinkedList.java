@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class NumLinkedList implements NumList {
     /* Stores a reference to the first node in the list */
     private LLNode front = null;
@@ -277,7 +279,7 @@ public class NumLinkedList implements NumList {
      * Reverses the order of the elements in the list
      */
     public void reverse() {
-        
+
     }
 
     /**
@@ -381,12 +383,19 @@ public class NumLinkedList implements NumList {
     }
 
     private static class NumLinkedListIterator implements DoubleIterator {
+        /* Stores a reference to the list that this iterator is accessing */
+        private NumLinkedList list = null;
+
+        /* Stores a reference to the current position of the iterator */
+        private LLNode nodePtr = null;
+        
         /**
          * Constructor for an iterator for NumLinkedList
          * @param list the list to iterate over
          */
         public NumLinkedListIterator(NumLinkedList list) {
-
+            this.list = list;
+            this.nodePtr = list.getFront();
         }
         
         /**
@@ -394,7 +403,7 @@ public class NumLinkedList implements NumList {
          * @return true if there is a value, false otherwise
          */
         public boolean hasNext() {
-            return false;
+            return nodePtr != null;
         }
         
         /**
@@ -402,7 +411,15 @@ public class NumLinkedList implements NumList {
          * @return the value at iterator's current index
          */
         public double next() {
-            return 0.0;
+            if (hasNext()) {
+                double save = nodePtr.getValue();
+                nodePtr = nodePtr.getNext();
+
+                return save;
+            }
+            else {
+                throw new NoSuchElementException();
+            }
         }
 
         /**
@@ -410,7 +427,12 @@ public class NumLinkedList implements NumList {
          * @return the value at the iterator's current index
          */
         public double peek() {
-            return 0.0;
+            if (hasNext()) {
+                return nodePtr.getValue();
+            }
+            else {
+                throw new NoSuchElementException();
+            }
         }
     }
 }
