@@ -102,7 +102,21 @@ public class NumLinkedList implements NumList {
      * @param value the number to be added to the end of the list
      */
     public void add(double value) {
+        // case for an empty list
+        if (getFront() == null) {
+            setFront(new LLNode(value, null, null));
+            setBack(getFront());
+        }
+        else {
+            // updates sorted based on the new value if the list is sorted, no update otherwise
+            setSorted(isSorted() ? value >= getBack().getValue() : isSorted());
 
+            // adds the new node to the back & updates the next for the previous "back" node
+            setBack(new LLNode(value, getBack(), null));
+            getBack().getPrev().setNext(getBack());
+        }
+
+        incrementSize();
     }
 
     /**
@@ -167,7 +181,7 @@ public class NumLinkedList implements NumList {
      * @return true if the list is sorted, false otherwise
      */
     public boolean isSorted() {
-        return false;
+        return this.sorted;
     }
 
     /**
