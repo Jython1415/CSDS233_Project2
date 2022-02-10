@@ -276,7 +276,7 @@ public class NumLinkedListTester {
         list2.add(3.0);
         Assert.assertFalse("The method should have returned false for the two lists, but it did not", list1.equals(list2));
     }
-o
+    
     /**
      * Unit tests for the remove duplicates method
      */
