@@ -144,28 +144,6 @@ public class NumArrayList implements NumList {
     }
 
     /**
-     * Checks whether this array is equal to the input array
-     * Two arrays are equal if they have all the same numbers in the same order
-     * @param otherList the other array to compare this array to
-     * @return true if the two are equal, false otherwise
-     */
-    public boolean equals(NumList otherList) {
-        if (size() != otherList.size()) {
-            return false;
-        }
-        else {
-            /* Iterates through both lists to compare the elements individually */
-            for (int i = 0; i < size(); i++) {
-                if (lookup(i) != otherList.lookup(i)) {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-    }
-
-    /**
      * Removes duplicates in this array while preserving the current order of the numbers
      * Time complexity is strictly less than O(N^2)
      */

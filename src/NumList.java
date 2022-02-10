@@ -62,7 +62,23 @@ public interface NumList extends DoubleIterable {
      * @param otherList the other list to compare this list to
      * @return true if the two are equal, false otherwise
      */
-    public abstract boolean equals(NumList otherList);
+    public default boolean equals(NumList otherList) {
+        if (this.size() != otherList.size()) {
+            return false;
+        }
+        else {
+            DoubleIterator i1 = this.iterator();
+            DoubleIterator i2 = otherList.iterator();
+
+            while (i1.hasNext()) {
+                if (i1.next() != i2.next()) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
 
     /**
      * Removes duplicates in this list while preserving the current order of the numbers

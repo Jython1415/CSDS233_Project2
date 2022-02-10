@@ -234,30 +234,6 @@ public class NumLinkedList implements NumList {
     }
 
     /**
-     * Checks whether this list is equal to the input list
-     * Two lists are equal if they have all the same numbers in the same order
-     * @param otherList the other list to compare this list to
-     * @return true if the two are equal, false otherwise
-     */
-    public boolean equals(NumList otherList) {
-        if (this.size() != otherList.size()) {
-            return false;
-        }
-        else {
-            DoubleIterator i1 = this.iterator();
-            DoubleIterator i2 = otherList.iterator();
-
-            while (i1.hasNext()) {
-                if (i1.next() != i2.next()) {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-    }
-
-    /**
      * Removes duplicates in this list while preserving the current order of the numbers
      */
     public void removeDuplicates() {
