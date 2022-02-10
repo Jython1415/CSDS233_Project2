@@ -59,7 +59,7 @@ public class NumListTester {
         list2.add(2.0);
         list2.add(4.0);
         Assert.assertEquals("The result should be a sorted union of the two lists",
-                            "0.0 1.0 2.0 3.0 4.0 5.0", NumList.union(list1, list2));
+                            "0.0 1.0 2.0 3.0 4.0 5.0", NumList.union(list1, list2).toString());
 
         // two sorted lists (with duplicates)
         list1.add(6.0);
@@ -69,6 +69,6 @@ public class NumListTester {
         list2.add(6.0);
         list2.add(9.0);
         Assert.assertEquals("The result should be a sorted union of the two lists with no duplicates",
-                            "0.0 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0", NumList.union(list1, list2));
+                            "0.0 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0", NumList.union(list1, list2).toString());
     }
 }
