@@ -269,7 +269,22 @@ public class NumLinkedList implements NumList {
      * Reverses the order of the elements in the list
      */
     public void reverse() {
+        LLNode frontSave = getFront();
 
+        setFront(getBack());
+        setBack(frontSave);
+
+        LLNode nodePtr = frontSave;
+        while (nodePtr != null) {
+            LLNode nextSave = nodePtr.getNext();
+
+            nodePtr.setNext(nodePtr.getPrev());
+            nodePtr.setPrev(nextSave);
+
+            nodePtr = nextSave;
+        }
+
+        setSorted(checkIfSorted());
     }
 
     /**
