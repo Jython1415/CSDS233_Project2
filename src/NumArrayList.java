@@ -175,17 +175,6 @@ public class NumArrayList implements NumList {
     }
 
     /**
-     * Creates a new list which has all elements in the input lists without any duplicate elements
-     * If both lists are sorted, then the resulting list is also sorted
-     * @param list1 the first list
-     * @param list2 the second list
-     * @return a NumList with all the elements of the input lists without any duplicate elements
-     */
-    public NumList union(NumList list1, NumList list2) {
-        return new NumArrayList();
-    }
-
-    /**
      * Provides a String representation of this array
      * For an empty array, an empty String is returned
      * Numbers are separated by a space and no other characters are included

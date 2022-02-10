@@ -103,7 +103,78 @@ public interface NumList extends DoubleIterable {
      * @param list2 the second list
      * @return a NumList with all the elements of the input lists without any duplicate elements
      */
-    public abstract NumList union(NumList list1, NumList list2);
+    public default NumList union(NumList list1, NumList list2) {
+        NumLinkedList newList = new NumLinkedList();
+
+        DoubleIterator i1 = list1.iterator();
+        DoubleIterator i2 = list2.iterator();
+
+        if (list1.isSorted() && list2.isSorted()) {
+            double lastAdded = 0.0;
+
+            if ((i1.hasNext() && i2.hasNext()) && (i1.peek() < i2.peek())) {
+                newList.add(i1.peek());
+                lastAdded = i1.next();
+            }
+            else if (i1.hasNext() && i2.hasNext()) {
+                newList.add(i2.peek());
+                lastAdded = i2.next();
+            }
+
+            while (i1.hasNext() && i2.hasNext()) {
+                if (i1.peek() < i2.peek()) {
+                    if (i1.peek() != lastAdded) {
+                        newList.add(i1.peek());
+                        lastAdded = i1.peek();
+                    }
+
+                    i1.next();
+                }
+                else {
+                    if (i2.peek() != lastAdded) {
+                        newList.add(i2.peek());
+                        lastAdded = i2.peek();
+                    }
+
+                    i2.next();
+                }
+            }
+            while (i1.hasNext()) {
+                if (i1.peek() != lastAdded) {
+                    newList.add(i1.peek());
+                    lastAdded = i1.peek();
+                }
+
+                i1.next();
+            }
+            while (i2.hasNext()) {
+                if (i2.peek() != lastAdded) {
+                    newList.add(i2.peek());
+                    lastAdded = i2.peek();
+                }
+
+                i2.next();
+            }
+        }
+        else {
+            while (i1.hasNext()) {
+                if (!newList.contains(i1.peek())) {
+                    newList.add(i1.peek());
+                }
+
+                i1.next();
+            }
+            while (i2.hasNext()) {
+                if (!newList.contains(i2.peek())) {
+                    newList.add(i2.peek());
+                }
+
+                i2.next();
+            }
+        }
+
+        return newList;
+    }
 
     /**
      * Provides a String representation of this list
