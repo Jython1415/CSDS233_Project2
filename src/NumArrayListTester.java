@@ -17,45 +17,6 @@ public class NumArrayListTester {
     }
 
     /**
-     * Compares a NumListArray to an array and returns true if they are the same, false otherwise
-     * Accounts for the size problem
-     * @param list1 the NumListArray to compare to array
-     * @param array the array to compare list1 to
-     * @return true is array is identical to list1 up to list1's size
-     * @throws IllegalAccessException passes along exception from reflection
-     * @throws InvocationTargetException passes along exception from reflection
-     * @throws NoSuchMethodException passes along exception from reflection
-     */
-    private static boolean compareNumArrayListToArray(NumArrayList list1, double[] array) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-        Method getInternalArray = list1.getClass().getDeclaredMethod("getInternalArray", (Class<?>[]) null);
-        getInternalArray.setAccessible(true);
-        double[] arrayList = (double[])(getInternalArray.invoke(list1, (Object[]) null));
-        for (int i = 0; i < list1.size(); i++) {
-            if (arrayList[i] != array[i]) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * Compares a NumArrayList to an array and asserts that they are equal using org.junit.Assert
-     * The method uses reflection to access the private field storing the internal array, and compares that to the array directly
-     * @param message the String message to report when the lists are not equal
-     * @param list1 the NumArrayList to be compared
-     * @param values the array to be compared
-     */
-    private static void assertNumArrayListEquals(String message, NumArrayList list1, double[] array) {
-        try {
-            Assert.assertTrue(message, NumArrayListTester.compareNumArrayListToArray(list1, array));
-        }
-        catch (Exception e) {
-            Assert.fail("There was an unexpected exception thrown by the unit test");
-        }
-    }
-
-    /**
      * Unit tests for the NumArrayList constructors
      */
     @Test
@@ -121,20 +82,20 @@ public class NumArrayListTester {
     public void testAdd() {
         // 0 elements
         NumArrayList list1 = new NumArrayList();
-        assertNumArrayListEquals("list1 was not empty when it should have been", list1, new double[] {});
+        Assert.assertEquals("list1 was not empty when it should have been", "", list1.toString());
         Assert.assertTrue("list1 size should have been 0 but it was not", list1.size() == 0);
         Assert.assertTrue("list1 capacity should have been 0 but it was not", list1.capacity() == 0);
 
         // 1 element
         list1.add(1.0);
-        assertNumArrayListEquals("list1 did not have the correct element", list1, new double[] {1.0});
+        Assert.assertEquals("list1 did not have the correct element", "1.0", list1.toString());
         Assert.assertTrue("list1 size should have been 1 but it was not", list1.size() == 1);
         Assert.assertTrue("list1 capacity should have been 1 but it was not", list1.capacity() == 1);
 
         // 3 elements
         list1.add(2.0);
         list1.add(3.0);
-        assertNumArrayListEquals("list1 did not have the correct elements", list1, new double[] {1.0, 2.0, 3.0});
+        Assert.assertEquals("list1 did not have the correct elements", "1.0 2.0 3.0", list1.toString());
         Assert.assertTrue("list1 size should have been 3 but it was not", list1.size() == 3);
         Assert.assertTrue("list1 capacity should have been 4 but it was not", list1.capacity() == 4);
     }
@@ -362,28 +323,28 @@ public class NumArrayListTester {
         // list with multiple elements but no duplicates
         list1 = NumArrayListTester.createArrayList(0.0, 1.0, 2.0, 3.0, 4.0);
         list1.removeDuplicates();
-        NumArrayListTester.assertNumArrayListEquals("The contents of the array were altered when they shouldn't have been",
-                                                    list1, new double[]{0.0, 1.0, 2.0, 3.0, 4.0});
+        Assert.assertEquals("The contents of the array were altered when they shouldn't have been",
+                            "0.0, 1.0, 2.0, 3.0, 4.0", list1.toString());
 
         /* a list with multiple duplicates at various locations */
         String message = "The method did not remove the duplicates correctly";
         // a list with adjacent duplicates
         list1 = NumArrayListTester.createArrayList(0.0, 0.0, 1.0, 1.0, 2.0);
         list1.removeDuplicates();
-        NumArrayListTester.assertNumArrayListEquals(message,
-                                                    list1, new double[]{0.0, 1.0, 2.0});
+        Assert.assertEquals(message,
+                            "0.0, 1.0, 2.0", list1.toString());
 
         // a list with duplicates at the ends
         list1 = NumArrayListTester.createArrayList(0.0, 1.0, 2.0, 1.0, 0.0);
         list1.removeDuplicates();
-        NumArrayListTester.assertNumArrayListEquals(message,
-                                                    list1, new double[]{0.0, 1.0, 2.0});
+        Assert.assertEquals(message,
+                            "0.0, 1.0, 2.0", list1.toString());
 
         // a list with elements that are all the same value
         list1 = NumArrayListTester.createArrayList(0.0, 0.0, 0.0, 0.0, 0.0);
         list1.removeDuplicates();
-        NumArrayListTester.assertNumArrayListEquals(message,
-                                                    list1, new double[]{0.0});
+        Assert.assertEquals(message,
+                            "0.0", list1.toString());
     }
 
     /**

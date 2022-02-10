@@ -103,7 +103,7 @@ public interface NumList extends DoubleIterable {
      * @param list2 the second list
      * @return a NumList with all the elements of the input lists without any duplicate elements
      */
-    public default NumList union(NumList list1, NumList list2) {
+    public static NumList union(NumList list1, NumList list2) {
         NumLinkedList newList = new NumLinkedList();
 
         DoubleIterator i1 = list1.iterator();
