@@ -465,17 +465,39 @@ public class NumArrayListTester {
     @Test
     public void testReverse() {
         // empty list
+        NumArrayList list1 = new NumArrayList();
+        NumArrayList list2 = new NumArrayList();
+        Assert.assertTrue("Two empty lists should be equal", list1.equals(list2));
+        list1.reverse();
+        Assert.assertTrue("Two empty lists should be equal", list1.equals(list2));
 
         // list with one element
+        list1.add(1.0);
+        list2.add(1.0);
+        list1.reverse();
+        Assert.assertTrue("Two lists with the same element should remain equal even after one is reversed", list1.equals(list2));
 
         // list with two elements that are the same
+        list1.add(1.0);
+        list2.add(1.0);
+        Assert.assertTrue("Two lists of repeated elements should remain equal even after one is reversed", list1.equals(list2));
 
         // list with two elements that are different
+        list1 = new NumArrayList();
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.reverse();
+        Assert.assertEquals("The list should have changed the order of the two elements", "1.0 0.0", list1.toString());
 
         // list with multiple elements
+        list1.add(2.0);
+        list1.reverse();
+        Assert.assertEquals("The list should have reversed the whole list", "2.0 0.0 1.0", list1.toString());
 
         // repeated calls to reverse
-        
+        list1.reverse();
+        list1.reverse();
+        Assert.assertEquals("Two consecutive calls to reverse should revert to the original list", "2.0 0.0 1.0", list1.toString());
     }
 
     /**
