@@ -37,6 +37,12 @@ public class NumLinkedListTester {
         // size updates after insertion
         list1.insert(0, 0.0);
         Assert.assertEquals(3, list1.size());
+
+        // size updates after removeDuplicates
+        list1.add(0.0);
+        Assert.assertEquals(4, list1.size());
+        list1.removeDuplicates();
+        Assert.assertEquals(3, list1.size());
     }
 
     /**
