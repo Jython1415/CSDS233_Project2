@@ -87,7 +87,8 @@ public class NumLinkedListTester {
         Assert.assertTrue("The method did not add the value to the list as intended", list1.lookup(0) == 0.0);
 
         // test when the new value displaces the one element in the list
-        // list1 = NumArrayListTester.createArrayList(1.0);
+        list1 = new NumLinkedList();
+        list1.insert(0, 1.0);
         list1.insert(0, 0.0);        
         Assert.assertEquals("The 1st element in the list should be 0.0", 0.0, list1.lookup(0), 0.0);
         Assert.assertEquals("The 2nd element in the list should be 1.0", 1.0, list1.lookup(1), 0.0);
