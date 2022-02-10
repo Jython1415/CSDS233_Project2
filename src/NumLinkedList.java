@@ -345,7 +345,20 @@ public class NumLinkedList implements NumList {
      * @return a String representation of the list
      */
     public String toString() {
-        return "";
+        StringBuilder result = new StringBuilder();
+
+        DoubleIterator i = this.iterator();
+
+        while (i.hasNext()) {
+            result.append(i.next()).append(" ");
+        }
+
+        // Remove the last space
+        if (result.length() > 0) {
+            result.setLength(result.length() - 1);
+        }
+
+        return result.toString(); 
     }
 
     /**
