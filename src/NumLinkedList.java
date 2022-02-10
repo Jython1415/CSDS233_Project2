@@ -231,7 +231,7 @@ public class NumLinkedList implements NumList {
             if (nodePtr.getValue() == value) {
                 return true;
             }
-            
+
             nodePtr = nodePtr.getNext();
         }
 
@@ -277,7 +277,7 @@ public class NumLinkedList implements NumList {
     public void removeDuplicates() {
         LLNode nodePtr1 = getFront();
 
-        while (nodePtr1.getNext() != null) {
+        while (nodePtr1 != null && nodePtr1.getNext() != null) {
             LLNode nodePtr2 = nodePtr1.getNext();
             while (nodePtr2 != null) {
                 if (nodePtr2.getValue() == nodePtr1.getValue()) {
