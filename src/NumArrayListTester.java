@@ -465,8 +465,8 @@ public class NumArrayListTester {
     @Test
     public void testReverse() {
         // empty list
-        NumArrayList list1 = new NumArrayList();
-        NumArrayList list2 = new NumArrayList();
+        NumList list1 = new NumArrayList();
+        NumList list2 = new NumArrayList();
         Assert.assertTrue("Two empty lists should be equal", list1.equals(list2));
         list1.reverse();
         Assert.assertTrue("Two empty lists should be equal", list1.equals(list2));
