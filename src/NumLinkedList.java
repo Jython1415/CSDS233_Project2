@@ -231,6 +231,8 @@ public class NumLinkedList implements NumList {
             if (nodePtr.getValue() == value) {
                 return true;
             }
+            
+            nodePtr = nodePtr.getNext();
         }
 
         return false;
