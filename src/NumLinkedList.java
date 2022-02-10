@@ -284,6 +284,8 @@ public class NumLinkedList implements NumList {
 
                 nodePtr2 = nodePtr2.getNext();
             }
+
+            nodePtr1 = nodePtr1.getNext();
         }
 
         setSorted(checkIfSorted());
