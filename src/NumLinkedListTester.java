@@ -169,7 +169,10 @@ public class NumLinkedListTester {
         Assert.assertTrue("The method should return true when the list contains the value", list1.contains(1.0));
 
         // test on a list with multiple values with multiple matches
-        // list1 = NumArrayListTester.createArrayList(0.0, 0.0, 0.0);
+        list1 = new NumLinkedList();
+        list1.add(0.0);
+        list1.add(0.0);
+        list1.add(0.0);
         Assert.assertTrue("The method should return true when the list contains the value", list1.contains(0.0));
 
         // test on a list with multiple values with no matches
