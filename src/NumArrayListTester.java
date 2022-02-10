@@ -351,7 +351,7 @@ public class NumArrayListTester {
     @Test
     public void testIsSorted() {
         // empty list
-        NumArrayList list1 = new NumArrayList();
+        NumList list1 = new NumArrayList();
         Assert.assertTrue("An empty list should be sorted", list1.isSorted());
 
         // list with one element
