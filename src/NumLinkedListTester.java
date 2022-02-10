@@ -95,12 +95,17 @@ public class NumLinkedListTester {
 
         // test when the new value goes after the one element in a list (and expands the capacity)
         // list1 = NumArrayListTester.createArrayList(0.0);
-        Assert.assertTrue("The capacity should be 1", list1.capacity() == 1);
+        list1 = new NumLinkedList();
+        list1.add(0.0);
         list1.insert(2, 1.0);
         Assert.assertEquals("The 2nd element in the list should be 1.0", 1.0, list1.lookup(1), 0.0);
 
         // test when the new value displaces multiple elements in a list
-        // list1 = NumArrayListTester.createArrayList(0.0, 2.0, 3.0, 4.0);
+        list1 = new NumLinkedList();
+        list1.add(0.0);
+        list1.add(2.0);
+        list1.add(3.0);
+        list1.add(4.0);
         list1.insert(1, 1.0);
         Assert.assertEquals("The 1st element in the list should be 0.0", 0.0, list1.lookup(0), 0.0);
         Assert.assertEquals("The 2nd element in the list should be 1.0", 1.0, list1.lookup(1), 0.0);
