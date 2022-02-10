@@ -1,8 +1,12 @@
 public class NumArrayList implements NumList {
     /* internalArray is for storing the values in the NumArrayList */
     private double[] internalArray = null;
+
     /* size keeps track of how many elements are stored in the list */
     private int size = 0;
+
+    /* Keeps track of whether the list is sorted or not */
+    private boolean sorted = true;
 
     /**
      * Creates a new NumArrayList with a capacity of 0
@@ -55,6 +59,10 @@ public class NumArrayList implements NumList {
         return getInternalArray().length;
     }
 
+    public void setSorted(boolean sorted) {
+        this.sorted = sorted;
+    }
+
     /**
      * Adds a number of the end of the array
      * The method expands the capacity if needed
@@ -66,7 +74,13 @@ public class NumArrayList implements NumList {
         }
         
         getInternalArray()[size()] = value;
+
+        if (isSorted() && value < lookup(size() - 2)) {
+            setSorted(false);
+        }
+
         this.size++;
+
     }
 
     /**
@@ -93,6 +107,22 @@ public class NumArrayList implements NumList {
 
             getInternalArray()[i] = value;
             size++;
+
+            if (i == 0) {
+                if (isSorted() && value > lookup(1)) {
+                    setSorted(false);
+                }
+            }
+            else if (i == size() - 1) {
+                if (isSorted() && value < lookup(size() - 2)) {
+                    setSorted(false);
+                }
+            }
+            else {
+                if (isSorted() && (lookup(i - 1) > value || value > lookup(i + 1))) {
+                    setSorted(false);
+                }
+            }
         }
     }
 
@@ -111,6 +141,8 @@ public class NumArrayList implements NumList {
 
             size--;
         }
+
+        setSorted(checkIfSorted());
     }
 
     /**
@@ -157,6 +189,22 @@ public class NumArrayList implements NumList {
                 }
             }
         }
+
+        setSorted(checkIfSorted());
+    }
+
+    /**
+     * Checks whether the list is sorted linearly
+     * @return true if the list is sorted, false otherwise
+     */
+    private boolean checkIfSorted() {
+        for (int i = 0; i < size() - 1; i++) {
+            if (lookup(i) > lookup(i + 1)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -164,7 +212,7 @@ public class NumArrayList implements NumList {
      * @return true if the list is sorted, false otherwise
      */
     public boolean isSorted() {
-        return false;
+        return this.sorted;
     }
 
     /**
