@@ -197,7 +197,11 @@ public class NumLinkedListTester {
         }
 
         // tests on a list with values
-        // list1 = NumArrayListTester.createArrayList(0.0, 1.0, 2.0, 3.0, 4.0);
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.add(2.0);
+        list1.add(3.0);
+        list1.add(4.0);
         try {
             String message = "The method returned a value from the wrong index of the list";
             Assert.assertTrue(message, list1.lookup(0) == 0.0);
