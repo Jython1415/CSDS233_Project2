@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class NumArrayList implements NumList {
     /* internalArray is for storing the values in the NumArrayList */
     private double[] internalArray = null;
@@ -258,20 +260,50 @@ public class NumArrayList implements NumList {
      * 
      */
     private static class NumArrayListIterator implements DoubleIterator {
+        /* Stores a reference to the list the iterator is iterating over */
+        private NumArrayList list = null;
+        
+        /* Stores the current index of the iterator */
+        private int index = 0;
+        
         /**
          * Constructor for an iterator for NumArrayList
          * @param list
          */
         public NumArrayListIterator(NumArrayList list) {
-
+            this.list = list;
+            this.index = 0;
         }
         
+        /**
+         * Getter for the list
+         * @return a reference to the list
+         */
+        private NumArrayList getList() {
+            return this.list;
+        }
+
+        /**
+         * Getter for the index
+         * @return the current index
+         */
+        private int getIndex() {
+            return this.index;
+        }
+
+        /**
+         * Increments the index
+         */
+        private void incrementIndex() {
+            this.index++;
+        }
+
         /**
          * Checks whether there is another value ahead of the iterator in the list
          * @return true if there is a value, false otherwise
          */
         public boolean hasNext() {
-            return false;
+            return getIndex() < getList().size();
         }
 
         /**
@@ -279,7 +311,14 @@ public class NumArrayList implements NumList {
          * @return the value at iterator's current index
          */
         public double next() {
-            return 0.0;
+            if (hasNext()) {
+                double save = getList().lookup(getIndex());
+                incrementIndex();
+                return save;
+            }
+            else {
+                throw new NoSuchElementException();
+            }
         }
 
         /**
@@ -287,7 +326,12 @@ public class NumArrayList implements NumList {
          * @return the value at the iterator's current index
          */
         public double peek() {
-            return 0.0;
+            if (hasNext()) {
+                return getList().lookup(getIndex());
+            }
+            else {
+                throw new NoSuchElementException();
+            }
         }
     }
 
