@@ -1,5 +1,11 @@
 import java.util.NoSuchElementException;
 
+/**
+ * For storing doubles in a list
+ * O(1) time complexity for access
+ * O(N) time complexity for adding, inserting, and deleting
+ * @author Joshua Shew
+ */
 public class NumArrayList implements NumList {
     /* internalArray is for storing the values in the NumArrayList */
     private double[] internalArray = null;
@@ -79,12 +85,10 @@ public class NumArrayList implements NumList {
         
         this.size++;
 
-
+        /* Updates the sorted field if the list becomes unsorted with the addition of the new value */
         if (size() > 1 && (isSorted() && value < lookup(size() - 2))) {
             setSorted(false);
         }
-
-
     }
 
     /**
@@ -103,8 +107,8 @@ public class NumArrayList implements NumList {
         if (i >= size()) {
             add(value);
         }
-        /* Shifts elements over to provide space for the insertion */
         else {
+            /* Shifts elements over to provide space for the insertion */
             for (int j = size(); j > i; j--) {
                 getInternalArray()[j] = getInternalArray()[j - 1];
             }
@@ -112,19 +116,23 @@ public class NumArrayList implements NumList {
             getInternalArray()[i] = value;
             size++;
 
-            if (i == 0) {
-                if (isSorted() && value > lookup(1)) {
-                    setSorted(false);
+            /* Check to see if the list remains sorted after insertion */
+            if (isSorted()) {
+                if (i == 0) {
+                    if (value > lookup(1)) {
+                        setSorted(false);
+                    }
                 }
-            }
-            else if (i == size() - 1) {
-                if (isSorted() && value < lookup(size() - 2)) {
-                    setSorted(false);
+                else if (i == size() - 1) {
+                    if (value < lookup(size() - 2)) {
+                        setSorted(false);
+                    }
                 }
-            }
-            else {
-                if (isSorted() && (lookup(i - 1) > value || value > lookup(i + 1))) {
-                    setSorted(false);
+                /* Insertion into the middle of the list must check both sides of the value */
+                else {
+                    if (lookup(i - 1) > value || value > lookup(i + 1)) {
+                        setSorted(false);
+                    }
                 }
             }
         }
@@ -181,15 +189,15 @@ public class NumArrayList implements NumList {
 
     /**
      * Removes duplicates in this array while preserving the current order of the numbers
-     * Time complexity is strictly less than O(N^2)
+     * Time complexity is strictly less than O(N^3)
      */
     public void removeDuplicates() {
         /* Index goes from start to finish */
         for (int i = 0; i < size(); i++) {
-            /* Index goes from the end back to the first index to remove duplicates of the current element*/
+            /* Index goes from the end back to the first index to remove duplicates of the current element */
             for (int j = size() - 1; j > i; j--) {
                 if (lookup(i) == lookup(j)) {
-                    remove(j);
+                    remove(j); // O(N) time complexity, which makes this method inefficient
                 }
             }
         }
@@ -202,6 +210,7 @@ public class NumArrayList implements NumList {
      * @return true if the list is sorted, false otherwise
      */
     private boolean checkIfSorted() {
+        /* Linear search for any elements in descending order */
         for (int i = 0; i < size() - 1; i++) {
             if (lookup(i) > lookup(i + 1)) {
                 return false;
@@ -223,6 +232,7 @@ public class NumArrayList implements NumList {
      * Reverses the order of the elements in the list
      */
     public void reverse() {
+        /* Iterates through half of the list & swaps values with the other half */
         for (int i = 0; i < (int)(size() / 2); i++) {
             double save = lookup(i);
             getInternalArray()[i] = lookup(size() - 1 - i);
@@ -264,7 +274,9 @@ public class NumArrayList implements NumList {
     }
 
     /**
-     * 
+     * Iterator for NumArrayList
+     * All methods are O(1)
+     * @author Joshua Shew
      */
     private static class NumArrayListIterator implements DoubleIterator {
         /* Stores a reference to the list the iterator is iterating over */
@@ -366,7 +378,11 @@ public class NumArrayList implements NumList {
         setInternalArray(tempArray);
     }
 
-    public static void main(String[] args) throws Exception {
+    /**
+     * Demonstration for the functionality of NumArrayList
+     * @param args unused
+     */
+    public static void main(String[] args) {
         String indent = "    ";
         String newLine = "\n";
 
