@@ -76,12 +76,14 @@ public class NumArrayList implements NumList {
         }
         
         getInternalArray()[size()] = value;
+        
+        this.size++;
 
-        if (isSorted() && value < lookup(size() - 2)) {
+
+        if (size() > 1 && (isSorted() && value < lookup(size() - 2))) {
             setSorted(false);
         }
 
-        this.size++;
 
     }
 
