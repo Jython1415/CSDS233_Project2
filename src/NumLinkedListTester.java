@@ -556,7 +556,10 @@ public class NumLinkedListTester {
         Assert.assertEquals("The method did not return the correct string", "0.0", list1.toString());
 
         // test on an array with multiple elements
-        // list1 = NumArrayListTester.createArrayList(0.0, 1.0, 2.0, 3.0, 4.0);
+        list1.add(1.0);
+        list1.add(2.0);
+        list1.add(3.0);
+        list1.add(4.0);
         Assert.assertEquals("The method did not return the correct string", "0.0 1.0 2.0 3.0 4.0", list1.toString());
     }
 }
