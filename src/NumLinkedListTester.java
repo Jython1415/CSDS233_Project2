@@ -10,17 +10,6 @@ public class NumLinkedListTester {
         // constructor with no parameters
         NumList list1 = new NumLinkedList();
         Assert.assertTrue("list1 size should have been 0 but it was not", list1.size() == 0);
-        Assert.assertTrue("list1 capacity should have been 0 but it was not", list1.capacity() == 0);
-
-        // constructor with capacity of 0
-        NumList list2 = new NumLinkedList(0);
-        Assert.assertTrue("list2 size should have been 0 but it was not", list2.size() == 0);
-        Assert.assertTrue("list2 capacity should have been 0 but it was not", list2.capacity() == 0);
-
-        // constructor with capacity of 3
-        NumList list3 = new NumLinkedList(3);
-        Assert.assertTrue("list3 size should have been 0 but it was not", list3.size() == 0);
-        Assert.assertTrue("list3 capacity should have been 3 but it was not", list3.capacity() == 3);
     }
     
     /**
@@ -33,13 +22,21 @@ public class NumLinkedListTester {
         Assert.assertTrue("list1 size should have been 0 but it was not", list1.size() == 0);
 
         // size 1
-        list1.add(1);
+        list1.add(1.0);
         Assert.assertTrue("list1 size should have been 1 but it was not", list1.size() == 1);
 
         // size 3
-        list1.add(1);
-        list1.add(1);
+        list1.add(2.0);
+        list1.add(3.0);
         Assert.assertTrue("list1 size should have been 3 but it was not", list1.size() == 3);
+
+        // size updates after removal
+        list1.remove(2);
+        Assert.assertEquals(2, list1.size());
+
+        // size updates after insertion
+        list1.insert(0, 0.0);
+        Assert.assertEquals(3, list1.size());
     }
 
     /**
@@ -47,18 +44,8 @@ public class NumLinkedListTester {
      */
     @Test
     public void testCapacity() {
-        // capacity 0
-        NumList list1 = new NumLinkedList();
-        Assert.assertTrue("list1 capacity should have been 0 but it was not", list1.capacity() == 0);
-
-        // capacity 1
-        list1.add(1);
-        Assert.assertTrue("list1 capacity should have been 1 but it was not", list1.capacity() == 1);
-
-        // capacity 4
-        list1.add(1);
-        list1.add(1);
-        Assert.assertTrue("list1 capacity should have been 4 but it was not", list1.capacity() == 4);
+        // for NumLinkedList, capacity is a constant, so it only requires one test
+        Assert.assertEquals(Integer.MAX_VALUE, ((NumList)(new NumLinkedList())).capacity());
     }
 
     /**
@@ -70,20 +57,17 @@ public class NumLinkedListTester {
         NumList list1 = new NumLinkedList();
         Assert.assertEquals("list1 was not empty when it should have been", "", list1.toString());
         Assert.assertTrue("list1 size should have been 0 but it was not", list1.size() == 0);
-        Assert.assertTrue("list1 capacity should have been 0 but it was not", list1.capacity() == 0);
 
         // 1 element
         list1.add(1.0);
         Assert.assertEquals("list1 did not have the correct element", "1.0", list1.toString());
         Assert.assertTrue("list1 size should have been 1 but it was not", list1.size() == 1);
-        Assert.assertTrue("list1 capacity should have been 1 but it was not", list1.capacity() == 1);
 
         // 3 elements
         list1.add(2.0);
         list1.add(3.0);
         Assert.assertEquals("list1 did not have the correct elements", "1.0 2.0 3.0", list1.toString());
         Assert.assertTrue("list1 size should have been 3 but it was not", list1.size() == 3);
-        Assert.assertTrue("list1 capacity should have been 4 but it was not", list1.capacity() == 4);
     }
 
     /**
@@ -127,19 +111,16 @@ public class NumLinkedListTester {
         // test on an empty list
         NumList list1 = new NumLinkedList();
         list1.remove(0);
-        Assert.assertTrue("The capacity of the list should be 0", list1.capacity() == 0);
         Assert.assertTrue("The size of the list should be 0", list1.size() == 0);
 
         // test on a list with one element with an index of 0
         list1.add(0.0);
         list1.remove(0);
-        Assert.assertTrue("The capacity of the list should be 1", list1.capacity() == 1);
         Assert.assertTrue("The size of the list should be 0", list1.size() == 0);
 
         // test on a list with one element with an index of 1
         list1.add(0.0);
         list1.remove(1);
-        Assert.assertTrue("The capacity of the list should be 1", list1.capacity() == 1);
         Assert.assertTrue("The size of the list should be 1", list1.size() == 1);
         Assert.assertTrue("The 1st element in the list should be 0.0", list1.lookup(0) == 0.0);
 
@@ -206,18 +187,6 @@ public class NumLinkedListTester {
             Assert.fail("The method threw the wrong exception: " + e.toString());
         }
 
-        // test on a list with capacity but size of 0 (empty)
-        list1 = new NumLinkedList(1);
-        try {
-            list1.lookup(0);
-            Assert.fail("The method should have thrown an exception but it did not");
-        }
-        catch (IndexOutOfBoundsException e) {
-        }
-        catch (Exception e) {
-            Assert.fail("The method threw the wrong exception: " + e.toString());
-        }
-
         // tests on a list with values
         // list1 = NumArrayListTester.createArrayList(0.0, 1.0, 2.0, 3.0, 4.0);
         try {
@@ -249,7 +218,7 @@ public class NumLinkedListTester {
      */
     @Test
     public void testEquals() {
-        // two empty lists of the same or different capacities should be equal
+        // two empty lists should be equal
         // the first test also checks communicativeness
         NumList list1 = new NumLinkedList();
         NumList list2 = new NumLinkedList();
@@ -257,34 +226,20 @@ public class NumLinkedListTester {
         Assert.assertTrue("The method should have returned true for the two lists, but it did not", list2.equals(list1));
         // a list should also equal itself
         Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list1));
-        // different capacities
-        list2 = new NumLinkedList(1);
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
 
-        // two lists with the same value with same or different capacities should be equal
-        // different capacities
-        // list1 = NumArrayListTester.createArrayList(1.0);
-        list2 = new NumLinkedList(2);
+        // two lists with the same value should be equal
+        list1.add(1.0);
         list2.add(1.0);
         Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
-        // same capacity
-        // list2 = NumArrayListTester.createArrayList(1.0);
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
 
-        // two lists with the same values with the same or different capacities should be equal
-        // different capacities
-        // list1 = NumArrayListTester.createArrayList(1.0, 2.0);
-        list2 = new NumLinkedList(4);
-        list2.add(1.0);
+        // two lists with the same values should be equal
+        list1.add(2.0);
         list2.add(2.0);
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
-        // same capacity
-        // list2 = NumArrayListTester.createArrayList(1.0, 2.0);
         Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
 
         // two lists with values that are not in the exact same order should not be equal
-        // list1 = NumArrayListTester.createArrayList(1.0, 2.0, 3.0);
-        // list2 = NumArrayListTester.createArrayList(1.0, 3.0, 2.0);
+        list1.add(2.0);
+        list2.add(3.0);
         Assert.assertFalse("The method should have returned false for the two lists, but it did not", list1.equals(list2));
     }
 
@@ -296,18 +251,19 @@ public class NumLinkedListTester {
         // empty list
         NumList list1 = new NumLinkedList();
         list1.removeDuplicates();
-        Assert.assertTrue("The capacity of the list should be 0", list1.capacity() == 0);
         Assert.assertTrue("The size of the list should be 0", list1.size() == 0);
 
         // list with one element
         list1.add(0.0);
         list1.removeDuplicates();
-        Assert.assertTrue("The capacity of the list should be 1", list1.capacity() == 1);
         Assert.assertTrue("The size of the list should be 1", list1.size() == 1);
         Assert.assertTrue("The 1st element in the list should be 0.0", list1.lookup(0) == 0.0);
 
         // list with multiple elements but no duplicates
-        // list1 = NumArrayListTester.createArrayList(0.0, 1.0, 2.0, 3.0, 4.0);
+        list1.add(1.0);
+        list1.add(2.0);
+        list1.add(3.0);
+        list1.add(4.0);
         list1.removeDuplicates();
         Assert.assertEquals("The contents of the array were altered when they shouldn't have been",
                             "0.0 1.0 2.0 3.0 4.0", list1.toString());
@@ -315,19 +271,34 @@ public class NumLinkedListTester {
         /* a list with multiple duplicates at various locations */
         String message = "The method did not remove the duplicates correctly";
         // a list with adjacent duplicates
-        // list1 = NumArrayListTester.createArrayList(0.0, 0.0, 1.0, 1.0, 2.0);
+        list1 = new NumLinkedList();
+        list1.add(0.0);
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.add(1.0);
+        list1.add(2.0);
         list1.removeDuplicates();
         Assert.assertEquals(message,
                             "0.0 1.0 2.0", list1.toString());
 
         // a list with duplicates at the ends
-        // list1 = NumArrayListTester.createArrayList(0.0, 1.0, 2.0, 1.0, 0.0);
+        list1 = new NumLinkedList();
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.add(2.0);
+        list1.add(1.0);
+        list1.add(0.0);
         list1.removeDuplicates();
         Assert.assertEquals(message,
                             "0.0 1.0 2.0", list1.toString());
 
         // a list with elements that are all the same value
-        // list1 = NumArrayListTester.createArrayList(0.0, 0.0, 0.0, 0.0, 0.0);
+        list1 = new NumLinkedList();
+        list1.add(0.0);
+        list1.add(0.0);
+        list1.add(0.0);
+        list1.add(0.0);
+        list1.add(0.0);
         list1.removeDuplicates();
         Assert.assertEquals(message,
                             "0.0", list1.toString());
