@@ -129,7 +129,7 @@ public class NumLinkedList implements NumList {
      * @param value the value to add to the list
      */
     public void insert(int i, double value) {
-        if (i >= size() - 1) {
+        if (i >= size()) {
             add(value);
         }
         else if (i == 0) {
@@ -138,6 +138,14 @@ public class NumLinkedList implements NumList {
 
             setFront(new LLNode(value, null, getFront()));
             getFront().getNext().setPrev(getFront());
+        }
+        else if (i == size() - 1) {
+            setSorted(isSorted() ?
+                      getBack().getPrev().getValue() <= value && value <= getBack().getValue() :
+                      isSorted());
+
+            getBack().setPrev((new LLNode(value, getBack().getPrev(), getBack())));
+            getBack().getPrev().getPrev().setNext(getBack().getPrev());
         }
         else {
             // finds the node directly before the insertion point
