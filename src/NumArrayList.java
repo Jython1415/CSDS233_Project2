@@ -220,6 +220,7 @@ public class NumArrayList implements NumList {
      */
     public void reverse() {
 
+        setSorted(checkIfSorted());
     }
 
     /**
