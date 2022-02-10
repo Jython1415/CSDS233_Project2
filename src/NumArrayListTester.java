@@ -1,7 +1,5 @@
-import java.lang.reflect.Method;
 import org.junit.Assert;
 import org.junit.Test;
-import java.lang.reflect.InvocationTargetException;
 
 public class NumArrayListTester {
     /**
@@ -324,7 +322,7 @@ public class NumArrayListTester {
         list1 = NumArrayListTester.createArrayList(0.0, 1.0, 2.0, 3.0, 4.0);
         list1.removeDuplicates();
         Assert.assertEquals("The contents of the array were altered when they shouldn't have been",
-                            "0.0, 1.0, 2.0, 3.0, 4.0", list1.toString());
+                            "0.0 1.0 2.0 3.0 4.0", list1.toString());
 
         /* a list with multiple duplicates at various locations */
         String message = "The method did not remove the duplicates correctly";
@@ -332,13 +330,13 @@ public class NumArrayListTester {
         list1 = NumArrayListTester.createArrayList(0.0, 0.0, 1.0, 1.0, 2.0);
         list1.removeDuplicates();
         Assert.assertEquals(message,
-                            "0.0, 1.0, 2.0", list1.toString());
+                            "0.0 1.0 2.0", list1.toString());
 
         // a list with duplicates at the ends
         list1 = NumArrayListTester.createArrayList(0.0, 1.0, 2.0, 1.0, 0.0);
         list1.removeDuplicates();
         Assert.assertEquals(message,
-                            "0.0, 1.0, 2.0", list1.toString());
+                            "0.0 1.0 2.0", list1.toString());
 
         // a list with elements that are all the same value
         list1 = NumArrayListTester.createArrayList(0.0, 0.0, 0.0, 0.0, 0.0);
