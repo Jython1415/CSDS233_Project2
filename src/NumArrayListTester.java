@@ -351,25 +351,112 @@ public class NumArrayListTester {
     @Test
     public void testIsSorted() {
         // empty list
+        NumArrayList list1 = new NumArrayList();
+        Assert.assertTrue("An empty list should be sorted", list1.isSorted());
 
         // list with one element
+        list1.add(0.0);
+        Assert.assertTrue("A list with one element should be sorted", list1.isSorted());
 
         // list with two identical elements
+        list1.add(0.0);
+        Assert.assertTrue("A list with two identical elements should be sorted", list1.isSorted());
 
         // list with two elements in ascending order
+        list1.remove(1);
+        list1.add(1.0);
+        Assert.assertTrue("A list with two values in ascending order should be considered sorted",
+                          list1.isSorted());
 
-        // list with two elements in descending order
+        // list with two elements in descending order (this is also a check for reverse)
+        list1.reverse();
+        Assert.assertFalse("A list with two values in descending order should not be considered sorted",
+                           list1.isSorted());
 
         // list with multiple elements in ascending order
+        list1.remove(1);
+        list1.remove(0);
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.add(1.0);
+        list1.add(2.0);
+        Assert.assertTrue("A list with multiple values in ascending order should be considered sorted",
+                          list1.isSorted());
 
         // list with multiple elements that are not sorted
+        list1.reverse();
+        Assert.assertFalse("A list with multiple values that are not in strictly ascending order should not be considered sorted",
+                           list1.isSorted());
 
-        // check a list that becomes sorted after removing an element
+        // check a list that becomes sorted (& one that remains unsorted) after removing an element
+        list1 = new NumArrayList();
+        list1.add(0.0);
+        list1.add(2.0);
+        list1.add(1.0);
+        list1.remove(1);
+        Assert.assertTrue("A list that becomes sorted after removing an item should be considered sorted",
+                          list1.isSorted());
+        list1 = new NumArrayList();
+        list1.add(0.0);
+        list1.add(2.0);
+        list1.add(2.0);
+        list1.add(1.0);
+        Assert.assertFalse("A list the remains unsorted after removing an item should still be considered unsorted",
+                           list1.isSorted());
 
-        // check a list that becomes unsorted after adding a value
+        // check a list that becomes unsorted (& one that remains sorted) after adding a value
+        list1 = new NumArrayList();
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.add(0.0);
+        Assert.assertFalse("A list that becomes unsorted after adding a value should be considered unsorted",
+                           list1.isSorted());
+        list1 = new NumArrayList();
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.add(2.0);
+        Assert.assertTrue("A list that remains sorted after adding a value should still be considered sorted",
+                          list1.isSorted());
 
-        // check a list that becomes unsorted after adding a value
+        // check a list that becomes unsorted (& one that remains sorted) after inserting a value
+        list1 = new NumArrayList();
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.insert(1, 2.0);
+        Assert.assertFalse("A list that becomes unsorted after inserting a value should be considered unsorted",
+                           list1.isSorted());
+        list1 = new NumArrayList();
+        list1.add(0.0);
+        list1.add(2.0);
+        list1.add(1.0);
+        Assert.assertTrue("A list that remains sorted after inserting a value should still be considered sorted",
+                          list1.isSorted());
 
+        // check a list that remains sorted after reversing the order
+        list1 = new NumArrayList();
+        list1.add(0.0);
+        list1.add(0.0);
+        list1.add(0.0);
+        list1.reverse();
+        Assert.assertTrue("A list that remains sorted after reversing the order should still be considered sorted",
+                          list1.isSorted());
+
+        // check a list the becomes sorted (& and one that remains unsorted) after removing duplicates
+        list1 = new NumArrayList();
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.add(0.0);
+        list1.removeDuplicates();
+        Assert.assertTrue("A list that becomes sorted after removing duplicates should be considered sorted",
+                          list1.isSorted());
+        list1 = new NumArrayList();
+        list1.add(0.0);
+        list1.add(2.0);
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.removeDuplicates();
+        Assert.assertFalse("A list that remains unsorted after removing duplicates should still be considered unsorted",
+                           list1.isSorted());
     }
 
     /**
