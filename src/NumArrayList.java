@@ -183,12 +183,15 @@ public class NumArrayList implements NumList {
     public String toString() {
         StringBuilder result = new StringBuilder();
 
-        for (int i = 0; i < size() - 1; i++) {
-            result.append(lookup(i)).append(" ");
+        DoubleIterator i = this.iterator();
+
+        while (i.hasNext()) {
+            result.append(i.next()).append(" ");
         }
 
-        if (size() != 0) {
-            result.append(lookup(size() - 1));
+        // Remove the last space
+        if (result.length() > 0) {
+            result.setLength(result.length() - 1);
         }
 
         return result.toString();
