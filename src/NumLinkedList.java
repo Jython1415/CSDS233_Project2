@@ -298,16 +298,23 @@ public class NumLinkedList implements NumList {
      * @return true if the list is sorted, false otherwise
      */
     public boolean checkIfSorted() {
-        LLNode nodePtr = getFront();
-
-        for (int i = 0; i < size() - 1; i++) {
-            nodePtr = nodePtr.getNext();
-            if (nodePtr.getValue() < nodePtr.getPrev().getValue()) {
-                return false;
-            }
+        if (size() < 2) {
+            return true;
         }
+        else {
+            DoubleIterator i = this.iterator();
+            double prev = i.next();
 
-        return true;
+            while (i.hasNext()) {
+                if (i.peek() < prev) {
+                    return false;
+                }
+
+                prev = i.next();
+            }
+
+            return true;
+        }
     }
 
     /**

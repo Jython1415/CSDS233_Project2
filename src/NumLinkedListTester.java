@@ -375,20 +375,23 @@ public class NumLinkedListTester {
                            list1.isSorted());
 
         // check a list that becomes sorted (& one that remains unsorted) after removing an element
-        list1 = new NumLinkedList();
-        list1.add(0.0);
-        list1.add(2.0);
-        list1.add(1.0);
-        list1.remove(1);
+        NumLinkedList list2 = new NumLinkedList();
+        list2.add(0.0);
+        list2.add(2.0);
+        list2.add(1.0);
+        System.out.println(list2.toString());
+        list2.remove(1);
+        System.out.println(list2.toString());
+        System.out.println(list2.checkIfSorted());
         Assert.assertTrue("A list that becomes sorted after removing an item should be considered sorted",
-                          list1.isSorted());
-        list1 = new NumLinkedList();
-        list1.add(0.0);
-        list1.add(2.0);
-        list1.add(2.0);
-        list1.add(1.0);
+                          list2.isSorted());
+        list2 = new NumLinkedList();
+        list2.add(0.0);
+        list2.add(2.0);
+        list2.add(2.0);
+        list2.add(1.0);
         Assert.assertFalse("A list the remains unsorted after removing an item should still be considered unsorted",
-                           list1.isSorted());
+                           list2.isSorted());
 
         // check a list that becomes unsorted (& one that remains sorted) after adding a value
         list1 = new NumLinkedList();
