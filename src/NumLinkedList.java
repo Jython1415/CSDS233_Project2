@@ -298,7 +298,7 @@ public class NumLinkedList implements NumList {
     public boolean checkIfSorted() {
         LLNode nodePtr = getFront();
 
-        for (int i = 0; i < size(); i++) {
+        for (int i = 0; i < size() - 1; i++) {
             nodePtr = nodePtr.getNext();
             if (nodePtr.getValue() < nodePtr.getPrev().getValue()) {
                 return false;
