@@ -428,7 +428,7 @@ public class NumArrayListTester {
         list1 = new NumArrayList();
         list1.add(0.0);
         list1.add(2.0);
-        list1.add(1.0);
+        list1.insert(1, 1.0);
         Assert.assertTrue("A list that remains sorted after inserting a value should still be considered sorted",
                           list1.isSorted());
 
