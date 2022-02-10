@@ -89,24 +89,23 @@ public class NumLinkedListTester {
         // test when the new value displaces the one element in the list
         // list1 = NumArrayListTester.createArrayList(1.0);
         list1.insert(0, 0.0);        
-        Assert.assertTrue("The 1st element in the list should be 0.0", list1.lookup(0) == 0.0);
-        Assert.assertTrue("The 2nd element in the list should be 1.0", list1.lookup(1) == 1.0);
+        Assert.assertEquals("The 1st element in the list should be 0.0", 0.0, list1.lookup(0), 0.0);
+        Assert.assertEquals("The 2nd element in the list should be 1.0", 1.0, list1.lookup(1), 0.0);
 
         // test when the new value goes after the one element in a list (and expands the capacity)
         // list1 = NumArrayListTester.createArrayList(0.0);
         Assert.assertTrue("The capacity should be 1", list1.capacity() == 1);
         list1.insert(2, 1.0);
-        Assert.assertTrue("The 2nd element in the list should be 1.0", list1.lookup(1) == 1.0);
-        Assert.assertTrue("The capacity should be 2", list1.capacity() == 2);
+        Assert.assertEquals("The 2nd element in the list should be 1.0", 1.0, list1.lookup(1), 0.0);
 
         // test when the new value displaces multiple elements in a list
         // list1 = NumArrayListTester.createArrayList(0.0, 2.0, 3.0, 4.0);
         list1.insert(1, 1.0);
-        Assert.assertTrue("The 1st element in the list should be 0.0", list1.lookup(0) == 0.0);
-        Assert.assertTrue("The 2nd element in the list should be 1.0", list1.lookup(1) == 1.0);
-        Assert.assertTrue("The 3rd element in the list should be 2.0", list1.lookup(2) == 2.0);
-        Assert.assertTrue("The 4th element in the list should be 3.0", list1.lookup(3) == 3.0);
-        Assert.assertTrue("The 5th element in the list should be 4.0", list1.lookup(4) == 4.0);
+        Assert.assertEquals("The 1st element in the list should be 0.0", 0.0, list1.lookup(0), 0.0);
+        Assert.assertEquals("The 2nd element in the list should be 1.0", 1.0, list1.lookup(1), 0.0);
+        Assert.assertEquals("The 3rd element in the list should be 2.0", 2.0, list1.lookup(2), 0.0);
+        Assert.assertEquals("The 4th element in the list should be 3.0", 3.0, list1.lookup(3), 0.0);
+        Assert.assertEquals("The 5th element in the list should be 4.0", 4.0, list1.lookup(4), 0.0);
     }
 
     /**
