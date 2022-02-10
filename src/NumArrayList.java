@@ -221,6 +221,11 @@ public class NumArrayList implements NumList {
      * Reverses the order of the elements in the list
      */
     public void reverse() {
+        for (int i = 0; i < (int)(size() / 2); i++) {
+            double save = lookup(i);
+            getInternalArray()[i] = lookup(size() - 1 - i);
+            getInternalArray()[size() - 1 - i] = save;
+        }
 
         setSorted(checkIfSorted());
     }
