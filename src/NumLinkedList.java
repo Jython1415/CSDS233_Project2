@@ -158,26 +158,37 @@ public class NumLinkedList implements NumList {
     /**
      * Removes the input node from the list
      * @param node the node to remove from the list
+     * @return the node before the node that was removed
      */
-    public void removeNode(LLNode node) {
+    public LLNode removeNode(LLNode node) {
+        decrementSize();
+
         if (node.getPrev() == null && node.getNext() == null) {
             setFront(null);
             setBack(null);
+
+            return null;
         }
         else if (node.getPrev() == null) {
             setFront(node.getNext());
             node.getNext().setPrev(null);
+
+            return null;
         }
         else if (node.getNext() == null) {
             setBack(node.getPrev());
             node.getPrev().setNext(null);
+
+            return getBack();
         }
         else {
+            LLNode save = node.getPrev();
+
             node.getPrev().setNext(node.getNext());
             node.getNext().setPrev(node.getPrev());
-        }
 
-        decrementSize();
+            return save;
+        }
     }
 
     /**
@@ -262,7 +273,20 @@ public class NumLinkedList implements NumList {
      * Removes duplicates in this list while preserving the current order of the numbers
      */
     public void removeDuplicates() {
+        LLNode nodePtr1 = getFront();
 
+        while (nodePtr1.getNext() != null) {
+            LLNode nodePtr2 = nodePtr1.getNext();
+            while (nodePtr2 != null) {
+                if (nodePtr2.getValue() == nodePtr1.getValue()) {
+                    nodePtr2 = removeNode(nodePtr2);
+                }
+
+                nodePtr2 = nodePtr2.getNext();
+            }
+        }
+
+        setSorted(checkIfSorted());
     }
 
     /**
