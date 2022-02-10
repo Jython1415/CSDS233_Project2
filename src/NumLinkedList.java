@@ -156,6 +156,31 @@ public class NumLinkedList implements NumList {
     }
 
     /**
+     * Removes the input node from the list
+     * @param node the node to remove from the list
+     */
+    public void removeNode(LLNode node) {
+        if (node.getPrev() == null && node.getNext() == null) {
+            setFront(null);
+            setBack(null);
+        }
+        else if (node.getPrev() == null) {
+            setFront(node.getNext());
+            node.getNext().setPrev(null);
+        }
+        else if (node.getNext() == null) {
+            setBack(node.getPrev());
+            node.getPrev().setNext(null);
+        }
+        else {
+            node.getPrev().setNext(node.getNext());
+            node.getNext().setPrev(node.getPrev());
+        }
+
+        decrementSize();
+    }
+
+    /**
      * Removes the number at the specified position of the list
      * All numbers after the specified position are shifted up the list
      * The size of the list is shortened by this method if there is a number at the specified position
