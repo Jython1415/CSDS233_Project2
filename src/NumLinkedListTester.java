@@ -136,14 +136,23 @@ public class NumLinkedListTester {
         Assert.assertTrue("The 1st element in the list should be 0.0", list1.lookup(0) == 0.0);
 
         // test on a list with multiple elements with an index of 0
-        // list1 = NumArrayListTester.createArrayList(-1.0, 0.0, 1.0, 2.0);
+        list1 = new NumLinkedList();
+        list1.add(-1.0);
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.add(2.0);
         list1.remove(0);
         Assert.assertTrue("The 1st element in the list should be 0.0", list1.lookup(0) == 0.0);
         Assert.assertTrue("The 2nd element in the list should be 1.0", list1.lookup(1) == 1.0);
         Assert.assertTrue("The 3rd element in the list should be 2.0", list1.lookup(2) == 2.0);
 
         // test on a list with multiple element with an index greater than the size
-        // list1 = NumArrayListTester.createArrayList(0.0, 1.0, 2.0, 3.0, 4.0);
+        list1 = new NumLinkedList();
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.add(2.0);
+        list1.add(3.0);
+        list1.add(4.0);
         list1.remove(5);
         Assert.assertTrue("The 1st element in the list should be 0.0", list1.lookup(0) == 0.0);
         Assert.assertTrue("The 2nd element in the list should be 1.0", list1.lookup(1) == 1.0);
