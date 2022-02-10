@@ -259,7 +259,7 @@ public class NumArrayList implements NumList {
      */
     private static class NumArrayListIterator implements DoubleIterator {
         /**
-         * 
+         * Constructor for an iterator for NumArrayList
          * @param list
          */
         public NumArrayListIterator(NumArrayList list) {
