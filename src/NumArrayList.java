@@ -83,6 +83,8 @@ public class NumArrayList implements NumList {
     /**
      * Adds a number of the end of the array
      * The method expands the capacity if needed
+     * O(1) if capacity is greater than size
+     * O(N) if capacity needs to be expanded
      * @param value the number to be added to the end of the array
      */
     public void add(double value) {
@@ -104,6 +106,7 @@ public class NumArrayList implements NumList {
      * Adds a number at a specified position of the array
      * All numbers after (and the number at) the specified position are shifted down the array
      * If the array has i or fewer numbers, then the value is added in the same fashion as the add method
+     * O(N)
      * @param i the index to insert the new value at
      * @param value the value to add to the array
      */
@@ -151,6 +154,7 @@ public class NumArrayList implements NumList {
      * Removes the number at the specified position of the array
      * All numbers after the specified position are shifted up the array
      * The size of the array is shortened by this method if there is a number at the specified position
+     * O(N)
      * @param i the index where the value should be removed
      */
     public void remove(int i) {
@@ -169,6 +173,7 @@ public class NumArrayList implements NumList {
     /**
      * Removes all elements of a certain value within the specified range of the list
      * The size of the lists is shortened by this method if there are elements to remove
+     * O(N)
      * @param start the index to start searching at (inclusive)
      * @param end the index to stop searching at (excluded)
      * @param value the value to remove
@@ -200,6 +205,7 @@ public class NumArrayList implements NumList {
 
     /**
      * Checks whether the array contains the input value
+     * O(N)
      * @param value the value is what the method is confirming is in the array
      * @return true if the value is in the array, false otherwise
      */
@@ -216,6 +222,7 @@ public class NumArrayList implements NumList {
 
     /**
      * Returns the i-th element of the array
+     * O(1)
      * @param i the index of the array to get the value from
      * @return the value stored at the specified index
      * @throws IndexOutOfBoundsException when the input index is greater than or equal to the size of the array
@@ -230,7 +237,7 @@ public class NumArrayList implements NumList {
 
     /**
      * Removes duplicates in this array while preserving the current order of the numbers
-     * Time complexity is strictly less than O(N^3)
+     * O(N^2)
      */
     public void removeDuplicates() {
         /* Index goes from start to finish */
@@ -244,6 +251,7 @@ public class NumArrayList implements NumList {
 
     /**
      * Checks whether the list is sorted linearly
+     * O(N)
      * @return true if the list is sorted, false otherwise
      */
     private boolean checkIfSorted() {
@@ -259,6 +267,7 @@ public class NumArrayList implements NumList {
 
     /**
      * Returns whether the list is currently sorted in increasing order or not
+     * O(1)
      * @return true if the list is sorted, false otherwise
      */
     public boolean isSorted() {
@@ -267,6 +276,7 @@ public class NumArrayList implements NumList {
 
     /**
      * Reverses the order of the elements in the list
+     * O(N)
      */
     public void reverse() {
         /* Iterates through half of the list & swaps values with the other half */
@@ -283,6 +293,7 @@ public class NumArrayList implements NumList {
      * Provides a String representation of this array
      * For an empty array, an empty String is returned
      * Numbers are separated by a space and no other characters are included
+     * O(N)
      * @return a String representation of the array
      */
     public String toString() {
@@ -304,6 +315,7 @@ public class NumArrayList implements NumList {
 
     /**
      * Returns an iterator for the list that begins at the front of the list
+     * O(1)
      * @return a DoubleIterator for the list the method is called on
      */
     public DoubleIterator iterator() {
@@ -393,6 +405,7 @@ public class NumArrayList implements NumList {
 
     /**
      * Copies the contents of one array onto another array and returns the new array
+     * O(N)
      * @param emptyArray the array the values are copied onto. This is the array that is returned by the method
      * @param originalArray the array the values are copied from
      * @return the array the values were copied onto
@@ -407,6 +420,7 @@ public class NumArrayList implements NumList {
     /**
      * Increases the capacity of the NumArrayList
      * Doubles the capacity
+     * O(N)
      */
     private void increaseCapacity() {
         /* Creates an array with double capacity or 1 if the current capacity is 0 */
