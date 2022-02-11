@@ -167,6 +167,35 @@ public class NumArrayList implements NumList {
     }
 
     /**
+     * Removes all elements of a certain value within the specified range of the list
+     * The size of the lists is shortened by this method if there are elements to remove
+     * @param start the index to start searching at (inclusive)
+     * @param end the index to stop searching at (excluded)
+     * @param value the value to remove
+     */
+    public void removeAll(int start, int end, double value) {
+        int shift = 0; // the number of values to shift by, also the number of values being removed
+
+        int i = start;
+        while (i + shift < end) {
+            if (lookup(i + shift) == value) {
+                shift++;
+            }
+
+            set(i, i + shift);
+            i++;
+        }
+        while (i + shift < size()) {
+            set(i, i + shift);
+            i++;
+        }
+
+        for (int j = 0; j < shift; j++) {
+            size--;
+        }
+    }
+
+    /**
      * Checks whether the array contains the input value
      * @param value the value is what the method is confirming is in the array
      * @return true if the value is in the array, false otherwise
