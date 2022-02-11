@@ -249,15 +249,13 @@ public class NumLinkedList implements NumList {
      * @return true if the value is in the list, false otherwise
      */
     public boolean contains(double value) {
-        LLNode nodePtr = getFront();
+        DoubleIterator i = this.iterator();
 
         /* Linear search through the list */
-        for (int i = 0; i < size(); i++) {
-            if (nodePtr.getValue() == value) {
+        while (i.hasNext()) {
+            if (i.next() == value) {
                 return true;
             }
-
-            nodePtr = nodePtr.getNext();
         }
 
         return false;
