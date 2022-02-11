@@ -59,6 +59,20 @@ public class NumArrayList implements NumList {
     }
 
     /**
+     * Increments the size
+     */
+    public void incrementSize() {
+        this.size++;
+    }
+
+    /**
+     * Decrements the size
+     */
+    public void decrementSize() {
+        this.size--;
+    }
+
+    /**
      * Getter method for the capacity of the array
      * The capacity is the number of numbers the array can hold without resizing
      * @return the capacity of the array
@@ -129,7 +143,7 @@ public class NumArrayList implements NumList {
             }
 
             set(i, value);
-            size++;
+            incrementSize();
 
             /* Check to see if the list remains sorted after insertion */
             if (isSorted()) {
@@ -167,7 +181,7 @@ public class NumArrayList implements NumList {
                 set(j, lookup(j + 1));
             }
 
-            size--;
+            decrementSize();
         }
 
         setSorted(checkIfSorted());
@@ -202,7 +216,7 @@ public class NumArrayList implements NumList {
 
         /* Decrease the size for however many elements were removed */
         for (int j = 0; j < shift; j++) {
-            size--;
+            decrementSize();
         }
     }
 
