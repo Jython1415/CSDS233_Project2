@@ -72,6 +72,15 @@ public class NumArrayList implements NumList {
     }
 
     /**
+     * Changes the value stored at the specified index in the list
+     * @param i the index to store the value at
+     * @param value the new value to store
+     */
+    private void set(int i, double value) {
+        getInternalArray()[i] = value;
+    }
+
+    /**
      * Adds a number of the end of the array
      * The method expands the capacity if needed
      * @param value the number to be added to the end of the array
@@ -81,7 +90,7 @@ public class NumArrayList implements NumList {
             increaseCapacity();
         }
         
-        getInternalArray()[size()] = value;
+        set(size(), value);
         
         this.size++;
 
@@ -110,10 +119,10 @@ public class NumArrayList implements NumList {
         else {
             /* Shifts elements over to provide space for the insertion */
             for (int j = size(); j > i; j--) {
-                getInternalArray()[j] = getInternalArray()[j - 1];
+                set(j, lookup(j - 1));
             }
 
-            getInternalArray()[i] = value;
+            set(i, value);
             size++;
 
             /* Check to see if the list remains sorted after insertion */
@@ -148,7 +157,7 @@ public class NumArrayList implements NumList {
         if (i < size()) {
             /* Shifts elements over until the element to be removed is covered up */
             for (int j = i; j < size() - 1; j++) {
-                getInternalArray()[j] = lookup(j + 1);
+                set(j, lookup(j + 1));
             }
 
             size--;
@@ -235,8 +244,8 @@ public class NumArrayList implements NumList {
         /* Iterates through half of the list & swaps values with the other half */
         for (int i = 0; i < (int)(size() / 2); i++) {
             double save = lookup(i);
-            getInternalArray()[i] = lookup(size() - 1 - i);
-            getInternalArray()[size() - 1 - i] = save;
+            set(i, lookup(size - i - 1));
+            set(size() - i - 1, save);
         }
 
         setSorted(checkIfSorted());
