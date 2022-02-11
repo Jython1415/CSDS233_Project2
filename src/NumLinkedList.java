@@ -1,5 +1,12 @@
 import java.util.NoSuchElementException;
 
+/**
+ * For storing doubles in a list
+ * O(N) time complexity for random access
+ * O(1) time complexity for insertion or removal from either end
+ * O(N) time complexity for random insertion and deletion
+ * @author Joshua Shew
+ */
 public class NumLinkedList implements NumList {
     /* Stores a reference to the first node in the list */
     private LLNode front = null;
@@ -51,7 +58,7 @@ public class NumLinkedList implements NumList {
     }
 
     /**
-     * Setter for the back of the 
+     * Setter for the back of the list
      * @param back
      */
     private void setBack(LLNode back) {
@@ -104,16 +111,16 @@ public class NumLinkedList implements NumList {
      * @param value the number to be added to the end of the list
      */
     public void add(double value) {
-        // case for an empty list
+        /* case for an empty list */
         if (getFront() == null) {
             setFront(new LLNode(value, null, null));
             setBack(getFront());
         }
         else {
-            // updates sorted based on the new value if the list is sorted, no update otherwise
+            /* updates sorted based on the new value if the list is sorted, no update otherwise */
             setSorted(isSorted() ? value >= getBack().getValue() : isSorted());
 
-            // adds the new node to the back & updates the next for the previous "back" node
+            /* adds the new node to the back & updates the next for the previous "back" node */
             setBack(new LLNode(value, getBack(), null));
             getBack().getPrev().setNext(getBack());
         }
@@ -129,17 +136,19 @@ public class NumLinkedList implements NumList {
      * @param value the value to add to the list
      */
     public void insert(int i, double value) {
+        /* cover cases when insert should behave like add */
         if (i >= size()) {
             add(value);
         }
         else if (i == 0) {
-            // updates sorted based on the new value if the list is sorted, no update otherwise
+            /* updates sorted based on the new value if the list is sorted, no update otherwise */
             setSorted(isSorted() ? value <= getFront().getValue() : isSorted());
 
             setFront(new LLNode(value, null, getFront()));
             getFront().getNext().setPrev(getFront());
         }
         else if (i == size() - 1) {
+            /* updates sorted based on the new value if the list is sorted, no update otherwise */
             setSorted(isSorted() ?
                       getBack().getPrev().getValue() <= value && value <= getBack().getValue() :
                       isSorted());
@@ -148,10 +157,10 @@ public class NumLinkedList implements NumList {
             getBack().getPrev().getPrev().setNext(getBack().getPrev());
         }
         else {
-            // finds the node directly before the insertion point
+            /* finds the node directly before the insertion point */
             LLNode nodePtr = nodeLookup(i - 1);
 
-            // updates sorted based on the new value if the list is sorted, no update otherwise
+            /* updates sorted based on the new value if the list is sorted, no update otherwise */
             setSorted(isSorted() ?
                       nodePtr.getValue() <= value && value <= nodePtr.getNext().getValue() :
                       isSorted());
@@ -171,24 +180,28 @@ public class NumLinkedList implements NumList {
     public LLNode removeNode(LLNode node) {
         decrementSize();
 
+        /* When the node is the only node in the list */
         if (node.getPrev() == null && node.getNext() == null) {
             setFront(null);
             setBack(null);
 
             return null;
         }
+        /* When the node is at the front of the list */
         else if (node.getPrev() == null) {
             setFront(node.getNext());
             node.getNext().setPrev(null);
 
             return null;
         }
+        /* When the node is at the back of the list*/
         else if (node.getNext() == null) {
             setBack(node.getPrev());
             node.getPrev().setNext(null);
 
             return getBack();
         }
+        /* When the node is in the middle of the list */
         else {
             LLNode save = node.getPrev();
 
@@ -211,11 +224,15 @@ public class NumLinkedList implements NumList {
                 setFront(null);
                 setBack(null);
             }
+            /* Removing the first element in the list */
             else if (i == 0) {
                 setFront(getFront().getNext());
+                getFront().setPrev(null);
             }
+            /* Removing the last element in the list */
             else if (i == size() - 1) {
                 setBack(getBack().getPrev());
+                getBack().setNext(null);
             }
             else {
                 LLNode nodePtr = nodeLookup(i - 1);
@@ -235,6 +252,7 @@ public class NumLinkedList implements NumList {
     public boolean contains(double value) {
         LLNode nodePtr = getFront();
 
+        /* Linear search through the list */
         for (int i = 0; i < size(); i++) {
             if (nodePtr.getValue() == value) {
                 return true;
@@ -285,8 +303,10 @@ public class NumLinkedList implements NumList {
     public void removeDuplicates() {
         LLNode nodePtr1 = getFront();
 
+        /* nodePtr1 goes through the entire list */
         while (nodePtr1 != null && nodePtr1.getNext() != null) {
             LLNode nodePtr2 = nodePtr1.getNext();
+            /* nodePtr2 removes all elements right of nodePtr1 that are duplicates of nodePtr1 */
             while (nodePtr2 != null) {
                 if (nodePtr2.getValue() == nodePtr1.getValue()) {
                     nodePtr2 = removeNode(nodePtr2);
@@ -306,9 +326,11 @@ public class NumLinkedList implements NumList {
      * @return true if the list is sorted, false otherwise
      */
     public boolean checkIfSorted() {
+        /* An empty list or a list with only 1 element is sorted already */
         if (size() < 2) {
             return true;
         }
+        /* Linear search for any elements out of order */
         else {
             DoubleIterator i = this.iterator();
             double prev = i.next();
@@ -343,6 +365,7 @@ public class NumLinkedList implements NumList {
         setBack(frontSave);
 
         LLNode nodePtr = frontSave;
+        /* Goes through and swaps next and previous for every node */
         while (nodePtr != null) {
             LLNode nextSave = nodePtr.getNext();
 
@@ -386,6 +409,10 @@ public class NumLinkedList implements NumList {
         return new NumLinkedListIterator(this);
     }
 
+    /**
+     * LLNode represents a single node in a list of nodes connected to each other
+     * @author Joshua Shew
+     */
     private static class LLNode {
         /* Stores the value in the node */
         private double value = 0.0;
@@ -457,6 +484,11 @@ public class NumLinkedList implements NumList {
         }
     }
 
+    /**
+     * Iterator for NumLinkedList
+     * All methods are O(1)
+     * @author Joshua Shew
+     */
     private static class NumLinkedListIterator implements DoubleIterator {
         /* Stores a reference to the current position of the iterator */
         private LLNode nodePtr = null;
