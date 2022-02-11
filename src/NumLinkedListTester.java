@@ -412,6 +412,18 @@ public class NumLinkedListTester {
                           list1.isSorted());
 
         // check a list that becomes unsorted (& one that remains sorted) after inserting a value
+        // front
+        list1 = new NumLinkedList();
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.insert(0, 2.0);
+        Assert.assertFalse(list1.isSorted());
+        list1 = new NumLinkedList();
+        list1.add(1.0);
+        list1.add(2.0);
+        list1.insert(0, 0.0);
+        Assert.assertTrue(list1.isSorted());
+        // middle
         list1 = new NumLinkedList();
         list1.add(0.0);
         list1.add(1.0);
@@ -424,6 +436,17 @@ public class NumLinkedListTester {
         list1.insert(1, 1.0);
         Assert.assertTrue("A list that remains sorted after inserting a value should still be considered sorted",
                           list1.isSorted());
+        // back
+        list1 = new NumLinkedList();
+        list1.add(1.0);
+        list1.add(2.0);
+        list1.insert(2, 0.0);
+        Assert.assertFalse(list1.isSorted());
+        list1 = new NumLinkedList();
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.insert(2, 2.0);
+        Assert.assertTrue(list1.isSorted());
 
         // check a list that remains sorted after reversing the order
         list1 = new NumLinkedList();
