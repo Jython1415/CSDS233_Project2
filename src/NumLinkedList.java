@@ -107,6 +107,7 @@ public class NumLinkedList implements NumList {
 
     /**
      * Adds a number of the end of the list
+     * O(1)
      * @param value the number to be added to the end of the list
      */
     public void add(double value) {
@@ -131,6 +132,8 @@ public class NumLinkedList implements NumList {
      * Adds a number at a specified position of the list
      * All numbers after (and the number at) the specified position are shifted down the list
      * If the list has i or fewer numbers, then the value is added in the same fashion as the add method
+     * O(1) for front or back
+     * O(N) for random index
      * @param i the index to insert the new value at
      * @param value the value to add to the list
      */
@@ -173,6 +176,7 @@ public class NumLinkedList implements NumList {
 
     /**
      * Removes the input node from the list
+     * O(1)
      * @param node the node to remove from the list
      * @return the node before the node that was removed
      */
@@ -215,6 +219,8 @@ public class NumLinkedList implements NumList {
      * Removes the number at the specified position of the list
      * All numbers after the specified position are shifted up the list
      * The size of the list is shortened by this method if there is a number at the specified position
+     * O(1) for front or back
+     * O(N) for random index
      * @param i the index where the value should be removed
      */
     public void remove(int i) {
@@ -245,6 +251,7 @@ public class NumLinkedList implements NumList {
 
     /**
      * Checks whether the list contains the input value
+     * O(N)
      * @param value the value is what the method is confirming is in the list
      * @return true if the value is in the list, false otherwise
      */
@@ -263,6 +270,8 @@ public class NumLinkedList implements NumList {
 
     /**
      * Returns the i-th node of the list
+     * O(1) for front or back
+     * O(N) for random access
      * @param index the index of the list to get the node from
      * @return a reference to the specified node
      * @throws IndexOutOfBoundsException when the input index is greater than or equal to the size of the list
@@ -299,6 +308,8 @@ public class NumLinkedList implements NumList {
 
     /**
      * Returns the i-th element of the list
+     * O(1) for front or back
+     * O(N) for random index
      * @param i the index of the list to get the value from
      * @return the value stored at the specified index
      * @throws IndexOutOfBoundsException when the input index is greater than or equal to the size of the list
@@ -309,6 +320,7 @@ public class NumLinkedList implements NumList {
 
     /**
      * Removes duplicates in this list while preserving the current order of the numbers
+     * O(N^2)
      */
     public void removeDuplicates() {
         LLNode nodePtr1 = getFront();
@@ -333,6 +345,7 @@ public class NumLinkedList implements NumList {
 
     /**
      * Checks the entire list to see if it is sorted
+     * O(N)
      * @return true if the list is sorted, false otherwise
      */
     public boolean checkIfSorted() {
@@ -359,6 +372,7 @@ public class NumLinkedList implements NumList {
 
     /**
      * Returns whether the list is currently sorted in increasing order or not
+     * O(1)
      * @return true if the list is sorted, false otherwise
      */
     public boolean isSorted() {
@@ -367,6 +381,7 @@ public class NumLinkedList implements NumList {
 
     /**
      * Reverses the order of the elements in the list
+     * O(N)
      */
     public void reverse() {
         LLNode frontSave = getFront();
@@ -392,6 +407,7 @@ public class NumLinkedList implements NumList {
      * Provides a String representation of this list
      * For an empty list, an empty String is returned
      * Numbers are separated by a space and no other characters are included
+     * O(N)
      * @return a String representation of the list
      */
     public String toString() {
@@ -413,6 +429,7 @@ public class NumLinkedList implements NumList {
 
     /**
      * Returns an iterator for the list that begins at the front of the list
+     * O(1)
      * @return a DoubleIterator for the list the method is called on
      */
     public DoubleIterator iterator() {
@@ -421,6 +438,7 @@ public class NumLinkedList implements NumList {
 
     /**
      * LLNode represents a single node in a list of nodes connected to each other
+     * All methods are O(1)
      * @author Joshua Shew
      */
     private static class LLNode {
