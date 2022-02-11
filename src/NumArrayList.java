@@ -67,7 +67,7 @@ public class NumArrayList implements NumList {
         return getInternalArray().length;
     }
 
-    public void setSorted(boolean sorted) {
+    private void setSorted(boolean sorted) {
         this.sorted = sorted;
     }
 
