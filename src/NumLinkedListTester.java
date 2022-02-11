@@ -225,10 +225,10 @@ public class NumLinkedListTester {
         list1.add(4.0);
         try {
             String message = "The method returned a value from the wrong index of the list";
-            Assert.assertTrue(message, list1.lookup(0) == 0.0);
-            Assert.assertTrue(message, list1.lookup(1) == 1.0);
-            Assert.assertTrue(message, list1.lookup(2) == 2.0);
-            Assert.assertTrue(message, list1.lookup(3) == 3.0);
+            Assert.assertEquals(message, 0.0, list1.lookup(0), 0.0);
+            Assert.assertEquals(message, 1.0, list1.lookup(1), 0.0);
+            Assert.assertEquals(message, 2.0, list1.lookup(2), 0.0);
+            Assert.assertEquals(message, 3.0, list1.lookup(3), 0.0);
             Assert.assertTrue(message, list1.lookup(4) == 4.0);
         }
         catch (Exception e) {
