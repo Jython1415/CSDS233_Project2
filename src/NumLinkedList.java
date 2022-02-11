@@ -273,11 +273,24 @@ public class NumLinkedList implements NumList {
             throw new IndexOutOfBoundsException();
         }
         else {
-            LLNode nodePtr = getFront();
+            LLNode nodePtr = null;
+            /* advance from the back if the node is in the back half of the list */
+            if (index > (int)(size() / 2)) {
+                nodePtr = getBack();
 
-            // advance in the list index times
-            for (int i = 0; i < index; i++) {
-                nodePtr = nodePtr.getNext();
+                // go backward in the list
+                for (int i = 0; i < size() - index - 1; i++) {
+                    nodePtr = nodePtr.getPrev();
+                }
+            }
+            /* advance from the front if the node is in the front half of hte list */
+            else {
+                nodePtr = getFront();
+
+                // advance in the list index times
+                for (int i = 0; i < index; i++) {
+                    nodePtr = nodePtr.getNext();
+                }
             }
 
             return nodePtr;
