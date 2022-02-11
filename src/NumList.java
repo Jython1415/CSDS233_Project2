@@ -63,9 +63,11 @@ public interface NumList extends DoubleIterable {
      * @return true if the two are equal, false otherwise
      */
     public default boolean equals(NumList otherList) {
+        /* If the sizes are different, they cannot be equal */
         if (this.size() != otherList.size()) {
             return false;
         }
+        /* Linear search for any differences */
         else {
             DoubleIterator i1 = this.iterator();
             DoubleIterator i2 = otherList.iterator();
@@ -110,19 +112,16 @@ public interface NumList extends DoubleIterable {
         DoubleIterator i2 = list2.iterator();
 
         if (list1.isSorted() && list2.isSorted()) {
-            double lastAdded = 0.0;
+            /* lastAdded keeps track of the last value added to the new list to prevent duplicate values */
+            /* This logic sets the value to something less than the first values in the two input lists */
+            double lastAdded = i1.hasNext() && i2.hasNext() ? 
+                               Math.min(i1.peek(), i2.peek()) - 1 :
+                               0;
 
-            if ((i1.hasNext() && i2.hasNext()) && (i1.peek() < i2.peek())) {
-                newList.add(i1.peek());
-                lastAdded = i1.next();
-            }
-            else if (i1.hasNext() && i2.hasNext()) {
-                newList.add(i2.peek());
-                lastAdded = i2.next();
-            }
-
+            /* Adds the values from each list in ascending order while skipping duplicates */
             while (i1.hasNext() && i2.hasNext()) {
                 if (i1.peek() < i2.peek()) {
+                    /* Checks to make sure a duplicate value is not added */
                     if (i1.peek() != lastAdded) {
                         newList.add(i1.peek());
                         lastAdded = i1.peek();
@@ -139,6 +138,7 @@ public interface NumList extends DoubleIterable {
                     i2.next();
                 }
             }
+            /* Add remaining values from list1 */
             while (i1.hasNext()) {
                 if (i1.peek() != lastAdded) {
                     newList.add(i1.peek());
@@ -147,6 +147,7 @@ public interface NumList extends DoubleIterable {
 
                 i1.next();
             }
+            /* Add remaining values from list2 */
             while (i2.hasNext()) {
                 if (i2.peek() != lastAdded) {
                     newList.add(i2.peek());
@@ -156,7 +157,9 @@ public interface NumList extends DoubleIterable {
                 i2.next();
             }
         }
+        /* When one or both of the input lists is not sorted */
         else {
+            /* Add all unique values from list1 */
             while (i1.hasNext()) {
                 if (!newList.contains(i1.peek())) {
                     newList.add(i1.peek());
@@ -164,6 +167,7 @@ public interface NumList extends DoubleIterable {
 
                 i1.next();
             }
+            /* Add all unique values from list2 */
             while (i2.hasNext()) {
                 if (!newList.contains(i2.peek())) {
                     newList.add(i2.peek());
