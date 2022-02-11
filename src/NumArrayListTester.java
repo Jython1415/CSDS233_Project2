@@ -103,6 +103,16 @@ public class NumArrayListTester {
      */
     @Test
     public void testInsert() {
+        // test when the index is negative
+        NumList list = new NumArrayList();
+        try {
+            list.insert(-1, 0.0);
+            Assert.fail("The method should have thrown an exception");
+        }
+        catch (Exception e) {
+            // the method succeeded
+        }
+        
         // test when the list is empty
         NumList list1 = new NumArrayList();
         list1.insert(0, 0.0);
@@ -214,6 +224,16 @@ public class NumArrayListTester {
      */
     @Test
     public void testLookup() {
+        // test with a negative index
+        NumList list = new NumArrayList();
+        try {
+            list.lookup(-1);
+            Assert.fail("The method should have thrown an exception");
+        }
+        catch (Exception e) {
+
+        }
+
         // test on a list with no capacity
         NumArrayList list1 = new NumArrayList();
         try {

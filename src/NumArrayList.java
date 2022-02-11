@@ -119,6 +119,9 @@ public class NumArrayList implements NumList {
         if (i >= size()) {
             add(value);
         }
+        else if (i < 0) {
+            throw new IndexOutOfBoundsException();
+        }
         else {
             /* Shifts elements over to provide space for the insertion */
             for (int j = size(); j > i; j--) {
@@ -228,7 +231,7 @@ public class NumArrayList implements NumList {
      * @throws IndexOutOfBoundsException when the input index is greater than or equal to the size of the array
      */
     public double lookup(int i) throws IndexOutOfBoundsException {
-        if (i >= size()) {
+        if (i >= size() || i < 0) {
             throw new IndexOutOfBoundsException();
         }
         

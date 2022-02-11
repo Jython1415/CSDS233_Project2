@@ -142,6 +142,9 @@ public class NumLinkedList implements NumList {
         if (i >= size()) {
             add(value);
         }
+        else if (i < 0) {
+            throw new IndexOutOfBoundsException();
+        }
         else if (i == 0) {
             /* updates sorted based on the new value if the list is sorted, no update otherwise */
             setSorted(isSorted() ? value <= getFront().getValue() : isSorted());
@@ -315,6 +318,10 @@ public class NumLinkedList implements NumList {
      * @throws IndexOutOfBoundsException when the input index is greater than or equal to the size of the list
      */
     public double lookup(int i) throws IndexOutOfBoundsException {
+        if (i < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        
         return nodeLookup(i).getValue();
     }
 
