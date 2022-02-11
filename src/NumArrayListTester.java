@@ -104,31 +104,39 @@ public class NumArrayListTester {
     @Test
     public void testInsert() {
         // test when the list is empty
-        NumArrayList list1 = new NumArrayList();
+        NumList list1 = new NumArrayList();
         list1.insert(0, 0.0);
-        Assert.assertTrue("The method did not add the value to the list as intended", list1.lookup(0) == 0.0);
+        Assert.assertEquals("The method did not add the value to the list as intended", 0.0, list1.lookup(0), 0.0);
 
         // test when the new value displaces the one element in the list
-        list1 = NumArrayListTester.createArrayList(1.0);
+        list1 = new NumArrayList();
+        list1.insert(0, 1.0);
         list1.insert(0, 0.0);        
-        Assert.assertTrue("The 1st element in the list should be 0.0", list1.lookup(0) == 0.0);
-        Assert.assertTrue("The 2nd element in the list should be 1.0", list1.lookup(1) == 1.0);
+        Assert.assertEquals("The 1st element in the list should be 0.0", 0.0, list1.lookup(0), 0.0);
+        Assert.assertEquals("The 2nd element in the list should be 1.0", 1.0, list1.lookup(1), 0.0);
 
         // test when the new value goes after the one element in a list (and expands the capacity)
-        list1 = NumArrayListTester.createArrayList(0.0);
-        Assert.assertTrue("The capacity should be 1", list1.capacity() == 1);
+        list1 = new NumArrayList();
+        list1.add(0.0);
         list1.insert(2, 1.0);
-        Assert.assertTrue("The 2nd element in the list should be 1.0", list1.lookup(1) == 1.0);
-        Assert.assertTrue("The capacity should be 2", list1.capacity() == 2);
+        Assert.assertEquals("The 2nd element in the list should be 1.0", 1.0, list1.lookup(1), 0.0);
 
         // test when the new value displaces multiple elements in a list
-        list1 = NumArrayListTester.createArrayList(0.0, 2.0, 3.0, 4.0);
+        list1 = new NumArrayList();
+        list1.add(0.0);
+        list1.add(2.0);
+        list1.add(3.0);
+        list1.add(4.0);
         list1.insert(1, 1.0);
-        Assert.assertTrue("The 1st element in the list should be 0.0", list1.lookup(0) == 0.0);
-        Assert.assertTrue("The 2nd element in the list should be 1.0", list1.lookup(1) == 1.0);
-        Assert.assertTrue("The 3rd element in the list should be 2.0", list1.lookup(2) == 2.0);
-        Assert.assertTrue("The 4th element in the list should be 3.0", list1.lookup(3) == 3.0);
-        Assert.assertTrue("The 5th element in the list should be 4.0", list1.lookup(4) == 4.0);
+        Assert.assertEquals("The value was not inserted correctly", "0.0 1.0 2.0 3.0 4.0", list1.toString());
+
+        // insertion in the middle
+        list1 = new NumArrayList();
+        list1.add(0.0);
+        list1.add(1.0);
+        Assert.assertEquals("0.0 1.0", list1.toString());
+        list1.insert(1, 2.0);
+        Assert.assertEquals("0.0 2.0 1.0", list1.toString());
     }
 
     /**
@@ -137,39 +145,39 @@ public class NumArrayListTester {
     @Test
     public void testRemove() {
         // test on an empty list
-        NumArrayList list1 = new NumArrayList();
+        NumList list1 = new NumArrayList();
         list1.remove(0);
-        Assert.assertTrue("The capacity of the list should be 0", list1.capacity() == 0);
         Assert.assertTrue("The size of the list should be 0", list1.size() == 0);
 
         // test on a list with one element with an index of 0
         list1.add(0.0);
         list1.remove(0);
-        Assert.assertTrue("The capacity of the list should be 1", list1.capacity() == 1);
         Assert.assertTrue("The size of the list should be 0", list1.size() == 0);
 
         // test on a list with one element with an index of 1
         list1.add(0.0);
         list1.remove(1);
-        Assert.assertTrue("The capacity of the list should be 1", list1.capacity() == 1);
         Assert.assertTrue("The size of the list should be 1", list1.size() == 1);
         Assert.assertTrue("The 1st element in the list should be 0.0", list1.lookup(0) == 0.0);
 
         // test on a list with multiple elements with an index of 0
-        list1 = NumArrayListTester.createArrayList(-1.0, 0.0, 1.0, 2.0);
+        list1 = new NumArrayList();
+        list1.add(-1.0);
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.add(2.0);
         list1.remove(0);
-        Assert.assertTrue("The 1st element in the list should be 0.0", list1.lookup(0) == 0.0);
-        Assert.assertTrue("The 2nd element in the list should be 1.0", list1.lookup(1) == 1.0);
-        Assert.assertTrue("The 3rd element in the list should be 2.0", list1.lookup(2) == 2.0);
+        Assert.assertEquals("The value was not removed correctly", "0.0 1.0 2.0", list1.toString());
 
         // test on a list with multiple element with an index greater than the size
-        list1 = NumArrayListTester.createArrayList(0.0, 1.0, 2.0, 3.0, 4.0);
+        list1 = new NumArrayList();
+        list1.add(0.0);
+        list1.add(1.0);
+        list1.add(2.0);
+        list1.add(3.0);
+        list1.add(4.0);
         list1.remove(5);
-        Assert.assertTrue("The 1st element in the list should be 0.0", list1.lookup(0) == 0.0);
-        Assert.assertTrue("The 2nd element in the list should be 1.0", list1.lookup(1) == 1.0);
-        Assert.assertTrue("The 3rd element in the list should be 2.0", list1.lookup(2) == 2.0);
-        Assert.assertTrue("The 4th element in the list should be 3.0", list1.lookup(3) == 3.0);
-        Assert.assertTrue("The 5th element in the list should be 4.0", list1.lookup(4) == 4.0);
+        Assert.assertEquals("The value was not removed correctly", "0.0 1.0 2.0 3.0 4.0", list1.toString());
     }
 
     /**

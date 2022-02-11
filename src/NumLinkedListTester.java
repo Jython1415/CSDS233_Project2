@@ -84,7 +84,7 @@ public class NumLinkedListTester {
         // test when the list is empty
         NumList list1 = new NumLinkedList();
         list1.insert(0, 0.0);
-        Assert.assertTrue("The method did not add the value to the list as intended", list1.lookup(0) == 0.0);
+        Assert.assertEquals("The method did not add the value to the list as intended", 0.0, list1.lookup(0), 0.0);
 
         // test when the new value displaces the one element in the list
         list1 = new NumLinkedList();
@@ -106,11 +106,7 @@ public class NumLinkedListTester {
         list1.add(3.0);
         list1.add(4.0);
         list1.insert(1, 1.0);
-        Assert.assertEquals("The 1st element in the list should be 0.0", 0.0, list1.lookup(0), 0.0);
-        Assert.assertEquals("The 2nd element in the list should be 1.0", 1.0, list1.lookup(1), 0.0);
-        Assert.assertEquals("The 3rd element in the list should be 2.0", 2.0, list1.lookup(2), 0.0);
-        Assert.assertEquals("The 4th element in the list should be 3.0", 3.0, list1.lookup(3), 0.0);
-        Assert.assertEquals("The 5th element in the list should be 4.0", 4.0, list1.lookup(4), 0.0);
+        Assert.assertEquals("The value was not inserted correctly", "0.0 1.0 2.0 3.0 4.0", list1.toString());
 
         // insertion in the middle
         list1 = new NumLinkedList();
@@ -149,9 +145,7 @@ public class NumLinkedListTester {
         list1.add(1.0);
         list1.add(2.0);
         list1.remove(0);
-        Assert.assertTrue("The 1st element in the list should be 0.0", list1.lookup(0) == 0.0);
-        Assert.assertTrue("The 2nd element in the list should be 1.0", list1.lookup(1) == 1.0);
-        Assert.assertTrue("The 3rd element in the list should be 2.0", list1.lookup(2) == 2.0);
+        Assert.assertEquals("The value was not removed correctly", "0.0 1.0 2.0", list1.toString());
 
         // test on a list with multiple element with an index greater than the size
         list1 = new NumLinkedList();
@@ -161,11 +155,7 @@ public class NumLinkedListTester {
         list1.add(3.0);
         list1.add(4.0);
         list1.remove(5);
-        Assert.assertTrue("The 1st element in the list should be 0.0", list1.lookup(0) == 0.0);
-        Assert.assertTrue("The 2nd element in the list should be 1.0", list1.lookup(1) == 1.0);
-        Assert.assertTrue("The 3rd element in the list should be 2.0", list1.lookup(2) == 2.0);
-        Assert.assertTrue("The 4th element in the list should be 3.0", list1.lookup(3) == 3.0);
-        Assert.assertTrue("The 5th element in the list should be 4.0", list1.lookup(4) == 4.0);
+        Assert.assertEquals("The value was not removed correctly", "0.0 1.0 2.0 3.0 4.0", list1.toString());
     }
 
     /**
