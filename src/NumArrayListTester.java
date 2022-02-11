@@ -265,50 +265,6 @@ public class NumArrayListTester {
     }
 
     /**
-     * Unit tests for the equals method
-     */
-    @Test
-    public void testEquals() {
-        // two empty lists of the same or different capacities should be equal
-        // the first test also checks communicativeness
-        NumArrayList list1 = new NumArrayList();
-        NumArrayList list2 = new NumArrayList();
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list2.equals(list1));
-        // a list should also equal itself
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list1));
-        // different capacities
-        list2 = new NumArrayList(1);
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
-
-        // two lists with the same value with same or different capacities should be equal
-        // different capacities
-        list1 = NumArrayListTester.createArrayList(1.0);
-        list2 = new NumArrayList(2);
-        list2.add(1.0);
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
-        // same capacity
-        list2 = NumArrayListTester.createArrayList(1.0);
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
-
-        // two lists with the same values with the same or different capacities should be equal
-        // different capacities
-        list1 = NumArrayListTester.createArrayList(1.0, 2.0);
-        list2 = new NumArrayList(4);
-        list2.add(1.0);
-        list2.add(2.0);
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
-        // same capacity
-        list2 = NumArrayListTester.createArrayList(1.0, 2.0);
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
-
-        // two lists with values that are not in the exact same order should not be equal
-        list1 = NumArrayListTester.createArrayList(1.0, 2.0, 3.0);
-        list2 = NumArrayListTester.createArrayList(1.0, 3.0, 2.0);
-        Assert.assertFalse("The method should have returned false for the two lists, but it did not", list1.equals(list2));
-    }
-
-    /**
      * Unit tests for the remove duplicates method
      */
     @Test

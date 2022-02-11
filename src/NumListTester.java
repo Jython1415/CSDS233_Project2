@@ -3,6 +3,104 @@ import org.junit.Test;
 
 public class NumListTester {
     /**
+     * Unit tests for the equals method
+     */
+    @Test
+    public void testEquals() {
+        // two empty lists should be equal (NumLinkedList (LL) & LL, NumArrayList (AL) & LL, and AL & AL)
+        // the first test also checks communicativeness
+        NumList list1 = new NumLinkedList();
+        NumList list2 = new NumLinkedList();
+        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
+        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list2.equals(list1));
+        list1 = new NumArrayList();
+        list2 = new NumLinkedList();
+        Assert.assertTrue(list1.equals(list2));
+        Assert.assertTrue(list2.equals(list1));
+        list1 = new NumArrayList();
+        list2 = new NumArrayList();
+        Assert.assertTrue(list1.equals(list2));
+        Assert.assertTrue(list2.equals(list1));
+        // a list should also equal itself
+        list1 = new NumLinkedList();
+        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list1));
+        list1 = new NumArrayList();
+        Assert.assertTrue(list1.equals(list1));
+
+        // two lists with the same value should be equal (LL & LL, AL & LL, AL & AL -- same thing for all tests)
+        list1 = new NumLinkedList();
+        list2 = new NumLinkedList();
+        list1.add(1.0);
+        list2.add(1.0);
+        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
+        list1 = new NumArrayList();
+        list2 = new NumLinkedList();
+        list1.add(1.0);
+        list2.add(1.0);
+        Assert.assertTrue(list1.equals(list2));
+        Assert.assertTrue(list2.equals(list1));
+        list1 = new NumArrayList();
+        list2 = new NumArrayList();
+        list1.add(1.0);
+        list2.add(1.0);
+        Assert.assertTrue(list1.equals(list2));
+
+        // two lists with the same values should be equal
+        list1 = new NumLinkedList();
+        list2 = new NumLinkedList();
+        list1.add(1.0);
+        list1.add(2.0);
+        list2.add(1.0);
+        list2.add(2.0);
+        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
+        list1 = new NumArrayList();
+        list2 = new NumLinkedList();
+        list1.add(1.0);
+        list1.add(2.0);
+        list2.add(1.0);
+        list2.add(2.0);
+        Assert.assertTrue(list1.equals(list2));
+        Assert.assertTrue(list2.equals(list1));
+        list1 = new NumArrayList();
+        list2 = new NumArrayList();
+        list1.add(1.0);
+        list1.add(2.0);
+        list2.add(1.0);
+        list2.add(2.0);
+        Assert.assertTrue(list1.equals(list2));
+
+        // two lists with values that are not in the exact same order should not be equal
+        list1 = new NumLinkedList();
+        list2 = new NumLinkedList();
+        list1.add(1.0);
+        list1.add(2.0);
+        list1.add(2.0);
+        list2.add(1.0);
+        list2.add(2.0);
+        list2.add(3.0);
+        Assert.assertFalse("The method should have returned false for the two lists, but it did not", list1.equals(list2));
+        list1 = new NumLinkedList();
+        list2 = new NumArrayList();
+        list1.add(1.0);
+        list1.add(2.0);
+        list1.add(2.0);
+        list2.add(1.0);
+        list2.add(2.0);
+        list2.add(3.0);
+        Assert.assertFalse(list1.equals(list2));
+        Assert.assertFalse(list2.equals(list1));
+        list1 = new NumArrayList();
+        list2 = new NumArrayList();
+        list1.add(1.0);
+        list1.add(2.0);
+        list1.add(2.0);
+        list2.add(1.0);
+        list2.add(2.0);
+        list2.add(3.0);
+        Assert.assertFalse(list1.equals(list2));
+    }
+
+    /**
      * Unit tests for the union method
      */
     @Test
@@ -19,7 +117,7 @@ public class NumListTester {
         list2 = new NumArrayList();
         Assert.assertEquals("The union of two empty lists should be an empty list", "", NumList.union(list1, list2).toString());
 
-        // one empty list and one list with one or multiple (unsorted) elements (LL & LL, AL & LL, AL & AL)
+        // one empty list and one list with one or multiple (unsorted) elements (LL & LL, AL & LL, AL & AL -- same thing for all tests)
         list1 = new NumLinkedList();
         list2 = new NumLinkedList();
         list1.add(0.0);

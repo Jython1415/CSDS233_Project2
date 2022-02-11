@@ -236,36 +236,6 @@ public class NumLinkedListTester {
             Assert.fail("The method threw the wrong exception: " + e.toString());
         }
     }
-
-    /**
-     * Unit tests for the equals method
-     */
-    @Test
-    public void testEquals() {
-        // two empty lists should be equal
-        // the first test also checks communicativeness
-        NumList list1 = new NumLinkedList();
-        NumList list2 = new NumLinkedList();
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list2.equals(list1));
-        // a list should also equal itself
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list1));
-
-        // two lists with the same value should be equal
-        list1.add(1.0);
-        list2.add(1.0);
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
-
-        // two lists with the same values should be equal
-        list1.add(2.0);
-        list2.add(2.0);
-        Assert.assertTrue("The method should have returned true for the two lists, but it did not", list1.equals(list2));
-
-        // two lists with values that are not in the exact same order should not be equal
-        list1.add(2.0);
-        list2.add(3.0);
-        Assert.assertFalse("The method should have returned false for the two lists, but it did not", list1.equals(list2));
-    }
     
     /**
      * Unit tests for the remove duplicates method
