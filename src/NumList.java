@@ -59,6 +59,7 @@ public interface NumList extends DoubleIterable {
     /**
      * Checks whether this list is equal to the input list
      * Two lists are equal if they have all the same numbers in the same order
+     * O(N)
      * @param otherList the other list to compare this list to
      * @return true if the two are equal, false otherwise
      */
@@ -101,6 +102,8 @@ public interface NumList extends DoubleIterable {
     /**
      * Creates a new list which has all elements in the input lists without any duplicate elements
      * If both lists are sorted, then the resulting list is also sorted
+     * O(N) for sorted lists
+     * O(N^2) for unsorted lists
      * @param list1 the first list
      * @param list2 the second list
      * @return a NumList (of true type NumLinkedList) with all the elements of the input lists without any duplicate elements
