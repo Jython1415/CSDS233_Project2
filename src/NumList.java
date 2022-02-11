@@ -103,7 +103,7 @@ public interface NumList extends DoubleIterable {
      * If both lists are sorted, then the resulting list is also sorted
      * @param list1 the first list
      * @param list2 the second list
-     * @return a NumList with all the elements of the input lists without any duplicate elements
+     * @return a NumList (of true type NumLinkedList) with all the elements of the input lists without any duplicate elements
      */
     public static NumList union(NumList list1, NumList list2) {
         NumLinkedList newList = new NumLinkedList();

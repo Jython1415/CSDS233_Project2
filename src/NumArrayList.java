@@ -400,6 +400,9 @@ public class NumArrayList implements NumList {
                            indent + "list.lookup(index); // returns the value stored at the index" + newLine +
                            indent + "list.equals(anotherList); // returns whether the two lists store the exact same values in the same order or not" + newLine +
                            indent + "list.removeDuplicates(); // removes duplicate values in the list" + newLine +
+                           indent + "list.isSorted(); // returns whether the list is sorted in ascending order or not" + newLine +
+                           indent + "list.reverse(); // reverses the order of the elements in the list" + newLine +
+                           indent + "NumList.union(list1, list2); // returns a combination of the two lists with no duplicates" + newLine +
                            indent + "list.toString(); // returns the values in the list separated by spaces" + newLine);
         
         System.out.println("Demonstration for NumArrayList(), size(), capacity(), add(value), and toString()");
@@ -528,6 +531,97 @@ public class NumArrayList implements NumList {
         System.out.println(list.toString());
         System.out.println(listCopy.toString());
         System.out.println(list.equals(listCopy));
+
+        System.out.println(""); // new line
+
+        System.out.println("Demonstration for isSorted() and reverse()");
+        System.out.println("--- Code ---");
+        System.out.println("NumArrayList list = new NumArrayList();" + newLine +
+                           "list.add(0.0);" + newLine +
+                           "list.add(1.0);" + newLine +
+                           "list.add(2.0);" + newLine +
+                           newLine +
+                           "System.out.println(list.isSorted());" + newLine +
+                           newLine + 
+                           "list.reverse();" + newLine +
+                           "System.out.println(list.toString());" + newLine +
+                           "System.out.println(list.isSorted());" + newLine +
+                           "list.reverse();" + newLine +
+                           "System.out.println(list.isSorted());" + newLine +
+                           newLine +
+                           "list.insert(0, 1.0);" + newLine +
+                           "System.out.println(list.isSorted());" + newLine);
+        System.out.println("-- Output --");
+
+        list = new NumArrayList();
+
+        list.add(0.0);
+        list.add(1.0);
+        list.add(2.0);
+
+        System.out.println(list.isSorted());
+
+        list.reverse();
+        System.out.println(list.toString());
+        System.out.println(list.isSorted());
+        list.reverse();
+        System.out.println(list.isSorted());
+
+        list.insert(0, 1.0);
+        System.out.println(list.isSorted());
+
+        System.out.println(""); // new line
+
+        System.out.println("Demonstration for union(list1, list2)");
+        System.out.println("--- Code ---");
+        System.out.println("NumArrayList list1 = new NumArrayList();" + newLine +
+                           "NumLinkedList list2 = new NumLinkedList();" + newLine +
+                           newLine + 
+                           "list1.add(1.0);" + newLine +
+                           "list1.add(3.0);" + newLine +
+                           "list1.add(5.0);" + newLine +
+                           "list1.add(5.0);" + newLine +
+                           "list1.add(7.0);" + newLine +
+                           "list1.add(9.0);" + newLine +
+                           newLine +
+                           "list2.add(0.0);" + newLine +
+                           "list2.add(2.0);" + newLine +
+                           "list2.add(4.0);" + newLine +
+                           "list2.add(5.0);" + newLine +
+                           "list2.add(5.0);" + newLine +
+                           "list2.add(6.0);" + newLine +
+                           "list2.add(8.0);" + newLine +
+                           "list2.add(9.0);" + newLine +
+                           "list2.add(10.0);" + newLine +
+                           newLine + 
+                           "System.out.println(list1.toString());" + newLine +
+                           "System.out.println(list2.toString());" + newLine +
+                           "System.out.println(NumList.union(list1, list2).toString());" + newLine);
+        System.out.println("-- Output --");
+
+        NumArrayList list1 = new NumArrayList();
+        NumLinkedList list2 = new NumLinkedList();
+
+        list1.add(1.0);
+        list1.add(3.0);
+        list1.add(5.0);
+        list1.add(5.0);
+        list1.add(7.0);
+        list1.add(9.0);
+
+        list2.add(0.0);
+        list2.add(2.0);
+        list2.add(4.0);
+        list2.add(5.0);
+        list2.add(5.0);
+        list2.add(6.0);
+        list2.add(8.0);
+        list2.add(9.0);
+        list2.add(10.0);
+
+        System.out.println(list1.toString());
+        System.out.println(list2.toString());
+        System.out.println(NumList.union(list1, list2).toString());
 
         System.out.println(""); // new line
 
