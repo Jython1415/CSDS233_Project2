@@ -173,23 +173,26 @@ public class NumArrayList implements NumList {
      * @param end the index to stop searching at (excluded)
      * @param value the value to remove
      */
-    public void removeAll(int start, int end, double value) {
+    private void removeAll(int start, int end, double value) {
         int shift = 0; // the number of values to shift by, also the number of values being removed
 
         int i = start;
-        while (i + shift < end) {
-            if (lookup(i + shift) == value) {
+        /* Go through the whole list and shift to remove values*/
+        while (i + shift < size()) {
+            /* While statement only helps to avoid errors with consecutive removals */
+            while ((i + shift < end && i + shift < size()) && lookup(i + shift) == value) {
                 shift++;
             }
+            
+            /* Shift over according to how many are being deleted */
+            if (i + shift < size()) {
+                set(i, lookup(i + shift));
+            }
 
-            set(i, i + shift);
             i++;
         }
-        while (i + shift < size()) {
-            set(i, i + shift);
-            i++;
-        }
 
+        /* Decrease the size for however many elements were removed */
         for (int j = 0; j < shift; j++) {
             size--;
         }
@@ -232,12 +235,8 @@ public class NumArrayList implements NumList {
     public void removeDuplicates() {
         /* Index goes from start to finish */
         for (int i = 0; i < size(); i++) {
-            /* Index goes from the end back to the first index to remove duplicates of the current element */
-            for (int j = size() - 1; j > i; j--) {
-                if (lookup(i) == lookup(j)) {
-                    remove(j); // O(N) time complexity, which makes this method inefficient
-                }
-            }
+            /* Remove all duplicates of the value at i from the remainder of the list */
+            removeAll(i + 1, size(), lookup(i));
         }
 
         setSorted(checkIfSorted());
